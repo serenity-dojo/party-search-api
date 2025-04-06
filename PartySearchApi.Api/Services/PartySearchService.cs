@@ -1,8 +1,5 @@
 ﻿using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PartySearchApi.Api.Services
 {
@@ -27,7 +24,7 @@ namespace PartySearchApi.Api.Services
             // Calculate total pages (ceiling of totalCount / pageSize)
             int totalPages = (int)Math.Ceiling((double)totalCount / request.PageSize);
 
-            return new SearchResponse(parties, 
+            return new SearchResponse(parties,
                                       new Pagination(totalCount, totalPages, request.Page, request.PageSize));
         }
 

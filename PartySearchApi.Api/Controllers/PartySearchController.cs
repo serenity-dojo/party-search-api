@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace PartySearchApi.Api.Controllers
 {

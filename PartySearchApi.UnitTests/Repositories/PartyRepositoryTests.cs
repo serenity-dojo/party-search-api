@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using FluentAssertions;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
 
@@ -56,9 +52,9 @@ namespace PartySearchApi.UnitTests.Repositories
             var result = await _repository.SearchPartiesAsync("Acme Corporation");
 
             // Assert
-            result.Parties.Should().HaveCount(1);
-            result.Parties[0].PartyId.Should().Be("P12345678");
-            result.Parties[0].Name.Should().Be("Acme Corporation");
+            _ = result.Parties.Should().HaveCount(1);
+            _ = result.Parties[0].PartyId.Should().Be("P12345678");
+            _ = result.Parties[0].Name.Should().Be("Acme Corporation");
         }
 
         [Test]
@@ -68,9 +64,9 @@ namespace PartySearchApi.UnitTests.Repositories
             var result = await _repository.SearchPartiesAsync("Acme");
 
             // Assert
-            result.Parties.Should().HaveCount(2);
-            result.Parties.Should().Contain(p => p.PartyId == "P12345678");
-            result.Parties.Should().Contain(p => p.PartyId == "P87654321");
+            _ = result.Parties.Should().HaveCount(2);
+            _ = result.Parties.Should().Contain(p => p.PartyId == "P12345678");
+            _ = result.Parties.Should().Contain(p => p.PartyId == "P87654321");
         }
 
         [Test]
@@ -80,9 +76,9 @@ namespace PartySearchApi.UnitTests.Repositories
             var result = await _repository.SearchPartiesAsync("P87654");
 
             // Assert
-            result.Parties.Should().HaveCount(2);
-            result.Parties.Should().Contain(p => p.PartyId == "P87654321");
-            result.Parties.Should().Contain(p => p.PartyId == "P87654329");
+            _ = result.Parties.Should().HaveCount(2);
+            _ = result.Parties.Should().Contain(p => p.PartyId == "P87654321");
+            _ = result.Parties.Should().Contain(p => p.PartyId == "P87654329");
         }
 
         [Test]
@@ -104,8 +100,8 @@ namespace PartySearchApi.UnitTests.Repositories
             var result = await _repository.SearchPartiesAsync("Acme", type: PartyType.Organization);
 
             // Assert
-            result.Parties.Should().HaveCount(2);
-            result.Parties.Should().OnlyContain(p => p.Type == PartyType.Organization);
+            _ = result.Parties.Should().HaveCount(2);
+            _ = result.Parties.Should().OnlyContain(p => p.Type == PartyType.Organization);
         }
 
         [Test]
@@ -115,9 +111,9 @@ namespace PartySearchApi.UnitTests.Repositories
             var result = await _repository.SearchPartiesAsync("Acme", sanctionsStatus: SanctionsStatus.PendingReview);
 
             // Assert
-            result.Parties.Should().HaveCount(1);
-            result.Parties[0].PartyId.Should().Be("P87654321");
-            result.Parties[0].SanctionsStatus.Should().Be(SanctionsStatus.PendingReview);
+            _ = result.Parties.Should().HaveCount(1);
+            _ = result.Parties[0].PartyId.Should().Be("P87654321");
+            _ = result.Parties[0].SanctionsStatus.Should().Be(SanctionsStatus.PendingReview);
         }
 
         public async Task SearchPartiesAsync_Pagination_ReturnsCorrectPage()
@@ -141,15 +137,15 @@ namespace PartySearchApi.UnitTests.Repositories
             var result = await _repository.SearchPartiesAsync("Test", page: 2, pageSize: 5);
 
             // Assert
-            result.Parties.Should().HaveCount(5);
-            result.TotalCount.Should().Be(20);  // Total matches
+            _ = result.Parties.Should().HaveCount(5);
+            _ = result.TotalCount.Should().Be(20);  // Total matches
 
             var expectedItems = moreParties
                 .OrderBy(p => p.Name)  // Match the repository's ordering
                 .Skip(5)               // Skip the first page
                 .Take(5);              // Take the second page
 
-            result.Parties[0].Name.Should().Be(expectedItems.First().Name);
+            _ = result.Parties[0].Name.Should().Be(expectedItems.First().Name);
         }
     }
 }

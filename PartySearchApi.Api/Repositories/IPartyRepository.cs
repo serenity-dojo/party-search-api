@@ -13,6 +13,6 @@ namespace PartySearchApi.Api.Repositories
 
         Task<List<Party>> GetAllPartiesAsync();
         Task AddPartiesAsync(List<Party> parties);
-        Task ClearAllAsync(); 
+        Task ClearAllAsync();
     }
 }

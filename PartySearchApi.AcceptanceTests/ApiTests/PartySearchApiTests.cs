@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using NUnit.Framework;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
 
@@ -31,7 +25,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
             _factory = new WebApplicationFactory<Program>()
                 .WithWebHostBuilder(builder =>
                 {
-                    builder.ConfigureServices(services =>
+                    _ = builder.ConfigureServices(services =>
                     {
                         // Remove existing repository registration
                         var descriptor = services.SingleOrDefault(
@@ -39,11 +33,11 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
 
                         if (descriptor != null)
                         {
-                            services.Remove(descriptor);
+                            _ = services.Remove(descriptor);
                         }
 
                         // Add our test repository instance
-                        services.AddSingleton<IPartyRepository>(_repository);
+                        _ = services.AddSingleton<IPartyRepository>(_repository);
                     });
                 });
 
@@ -84,7 +78,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
             }
 
             // Assert
-            response.IsSuccessStatusCode.Should().BeTrue();
+            _ = response.IsSuccessStatusCode.Should().BeTrue();
         }
 
         [Test]
@@ -94,15 +88,15 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
             var response = await _httpClient.GetAsync("api/partysearch/search?searchTerm=Acme");
 
             // Assert
-            response.IsSuccessStatusCode.Should().BeTrue();
+            _ = response.IsSuccessStatusCode.Should().BeTrue();
 
             var content = await response.Content.ReadAsStringAsync();
             var searchResponse = JsonSerializer.Deserialize<SearchResponse>(
                 content, _jsonOptions);
 
-            searchResponse.Should().NotBeNull();
-            searchResponse.Data.Should().HaveCountGreaterThan(0);
-            searchResponse.Data.Should().Contain(p => p.Name.Contains("Acme"));
+            _ = searchResponse.Should().NotBeNull();
+            _ = searchResponse.Data.Should().HaveCountGreaterThan(0);
+            _ = searchResponse.Data.Should().Contain(p => p.Name.Contains("Acme"));
         }
 
         [Test]
@@ -113,14 +107,14 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 "api/partysearch/search?searchTerm=Smith&type=Individual&sanctionsStatus=Approved");
 
             // Assert
-            response.IsSuccessStatusCode.Should().BeTrue();
+            _ = response.IsSuccessStatusCode.Should().BeTrue();
 
             var content = await response.Content.ReadAsStringAsync();
             var searchResponse = JsonSerializer.Deserialize<SearchResponse>(
                 content, _jsonOptions);
 
-            searchResponse.Should().NotBeNull();
-            searchResponse.Data.Should().OnlyContain(p =>
+            _ = searchResponse.Should().NotBeNull();
+            _ = searchResponse.Data.Should().OnlyContain(p =>
                 p.Name.Contains("Smith") &&
                 p.Type == PartyType.Individual &&
                 p.SanctionsStatus == SanctionsStatus.Approved);
@@ -138,18 +132,18 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 "api/partysearch/search?searchTerm=Test&page=2&pageSize=10");
 
             // Assert
-            response.IsSuccessStatusCode.Should().BeTrue();
+            _ = response.IsSuccessStatusCode.Should().BeTrue();
 
             var content = await response.Content.ReadAsStringAsync();
             var searchResponse = JsonSerializer.Deserialize<SearchResponse>(
                 content, _jsonOptions);
 
-            searchResponse.Should().NotBeNull();
-            searchResponse.Data.Should().HaveCount(10); // Second page should have 10 items
-            searchResponse.Pagination.CurrentPage.Should().Be(2);
-            searchResponse.Pagination.PageSize.Should().Be(10);
-            searchResponse.Pagination.TotalResults.Should().Be(30);
-            searchResponse.Pagination.TotalPages.Should().Be(3);
+            _ = searchResponse.Should().NotBeNull();
+            _ = searchResponse.Data.Should().HaveCount(10); // Second page should have 10 items
+            _ = searchResponse.Pagination.CurrentPage.Should().Be(2);
+            _ = searchResponse.Pagination.PageSize.Should().Be(10);
+            _ = searchResponse.Pagination.TotalResults.Should().Be(30);
+            _ = searchResponse.Pagination.TotalPages.Should().Be(3);
         }
 
         [Test]
@@ -160,15 +154,15 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 "api/partysearch/search?searchTerm=Nonexistent");
 
             // Assert
-            response.IsSuccessStatusCode.Should().BeTrue();
+            _ = response.IsSuccessStatusCode.Should().BeTrue();
 
             var content = await response.Content.ReadAsStringAsync();
             var searchResponse = JsonSerializer.Deserialize<SearchResponse>(
                 content, _jsonOptions);
 
-            searchResponse.Should().NotBeNull();
-            searchResponse.Data.Should().BeEmpty();
-            searchResponse.Pagination.TotalResults.Should().Be(0);
+            _ = searchResponse.Should().NotBeNull();
+            _ = searchResponse.Data.Should().BeEmpty();
+            _ = searchResponse.Pagination.TotalResults.Should().Be(0);
         }
 
         [Test]
@@ -179,14 +173,14 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 "api/partysearch/search?searchTerm=acme");
 
             // Assert
-            response.IsSuccessStatusCode.Should().BeTrue();
+            _ = response.IsSuccessStatusCode.Should().BeTrue();
 
             var content = await response.Content.ReadAsStringAsync();
             var searchResponse = JsonSerializer.Deserialize<SearchResponse>(
                 content, _jsonOptions);
 
-            searchResponse.Should().NotBeNull();
-            searchResponse.Data.Should().Contain(p => p.Name == "Acme Corporation");
+            _ = searchResponse.Should().NotBeNull();
+            _ = searchResponse.Data.Should().Contain(p => p.Name == "Acme Corporation");
         }
 
         private async Task SeedTestData()

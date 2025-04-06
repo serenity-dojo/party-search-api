@@ -1,11 +1,11 @@
-﻿using FluentAssertions;
+﻿using System.Web;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using PartySearchApi.AcceptanceTests.Models;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
-using PartySearchApi.AcceptanceTests.Models;
-using System.Web;
 using Reqnroll;
 
 namespace PartySearchApi.AcceptanceTests.StepDefinitions
@@ -24,7 +24,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             var factory = new WebApplicationFactory<Program>()
                 .WithWebHostBuilder(builder =>
                 {
-                    builder.ConfigureServices(services =>
+                    _ = builder.ConfigureServices(services =>
                     {
                         // Remove existing repository registration
                         var descriptor = services.SingleOrDefault(
@@ -32,11 +32,11 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
 
                         if (descriptor != null)
                         {
-                            services.Remove(descriptor);
+                            _ = services.Remove(descriptor);
                         }
 
                         // Add our test repository instance
-                        services.AddSingleton<IPartyRepository>(_repository);
+                        _ = services.AddSingleton<IPartyRepository>(_repository);
                     });
                 });
 
@@ -110,7 +110,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         public async Task WhenSearchesForWithTheFollowingFilters(string person, string searchTerm, Table table)
         {
             PartyType? type = null;
-            SanctionsStatus? sanctionsStatus = null;    
+            SanctionsStatus? sanctionsStatus = null;
             foreach (var row in table.Rows)
             {
                 if (row["Filter"] == "Type")
@@ -156,11 +156,11 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         {
             var expectedParties = table.CreateSet<PartyDto>().Select(MapToParty).ToList();
 
-            _searchResponse.Data.Should().HaveCount(expectedParties.Count);
+            _ = _searchResponse.Data.Should().HaveCount(expectedParties.Count);
 
             foreach (var expectedParty in expectedParties)
             {
-                _searchResponse.Data.Should().Contain(p =>
+                _ = _searchResponse.Data.Should().Contain(p =>
                     p.PartyId == expectedParty.PartyId &&
                     p.Name == expectedParty.Name &&
                     p.Type == expectedParty.Type &&
@@ -172,13 +172,13 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         [Then(@"the search results should be empty")]
         public void ThenTheSearchResultsShouldBeEmpty()
         {
-            _searchResponse.Data.Should().BeEmpty();
+            _ = _searchResponse.Data.Should().BeEmpty();
         }
 
         [Then(@"the parties returned should be items (.*)\-(.*) of the complete result set")]
         public void ThenThePartiesReturnedShouldBeItemsOfTheCompleteResultSet(int start, int end)
         {
-            _searchResponse.Data.Should().HaveCount(end - start + 1);
+            _ = _searchResponse.Data.Should().HaveCount(end - start + 1);
         }
 
         [Then(@"the response should include pagination metadata:")]
@@ -188,19 +188,19 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             {
                 if (row.ContainsKey("totalResults"))
                 {
-                    _searchResponse.Pagination.TotalResults.Should().Be(int.Parse(row["totalResults"]));
+                    _ = _searchResponse.Pagination.TotalResults.Should().Be(int.Parse(row["totalResults"]));
                 }
                 if (row.ContainsKey("totalPages"))
                 {
-                    _searchResponse.Pagination.TotalPages.Should().Be(int.Parse(row["totalPages"]));
+                    _ = _searchResponse.Pagination.TotalPages.Should().Be(int.Parse(row["totalPages"]));
                 }
                 if (row.ContainsKey("currentPage"))
                 {
-                    _searchResponse.Pagination.CurrentPage.Should().Be(int.Parse(row["currentPage"]));
+                    _ = _searchResponse.Pagination.CurrentPage.Should().Be(int.Parse(row["currentPage"]));
                 }
                 if (row.ContainsKey("pageSize"))
                 {
-                    _searchResponse.Pagination.PageSize.Should().Be(int.Parse(row["pageSize"]));
+                    _ = _searchResponse.Pagination.PageSize.Should().Be(int.Parse(row["pageSize"]));
                 }
             }
         }
@@ -226,7 +226,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
 
             var queryString = queryBuilder.ToString();
             var response = await _client.GetAsync($"api/partysearch/search?{queryString}");
-            response.EnsureSuccessStatusCode();
+            _ = response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
             _searchResponse = JsonConvert.DeserializeObject<SearchResponse>(content);

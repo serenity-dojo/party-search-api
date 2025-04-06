@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using NUnit.Framework;
 using PartySearchApi.Api.Controllers;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Services;
@@ -49,7 +46,7 @@ namespace PartySearchApi.UnitTests.Controllers
                 new Pagination(1, 1, 1, 10)
              );
 
-            _mockService.Setup(s => s.SearchPartiesAsync(It.Is<SearchRequest>(r =>
+            _ = _mockService.Setup(s => s.SearchPartiesAsync(It.Is<SearchRequest>(r =>
                 r.SearchTerm == expectedRequest.SearchTerm &&
                 r.Type == expectedRequest.Type &&
                 r.Page == expectedRequest.Page &&
@@ -66,12 +63,12 @@ namespace PartySearchApi.UnitTests.Controllers
 
             // Assert
             var okResult = result.Result as OkObjectResult;
-            okResult.Should().NotBeNull();
+            _ = okResult.Should().NotBeNull();
 
             var returnedResponse = okResult.Value as SearchResponse;
-            returnedResponse.Should().NotBeNull();
-            returnedResponse.Data.Should().HaveCount(1);
-            returnedResponse.Data[0].PartyId.Should().Be("P12345678");
+            _ = returnedResponse.Should().NotBeNull();
+            _ = returnedResponse.Data.Should().HaveCount(1);
+            _ = returnedResponse.Data[0].PartyId.Should().Be("P12345678");
         }
     }
 }

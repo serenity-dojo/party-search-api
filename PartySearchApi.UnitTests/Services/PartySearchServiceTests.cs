@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
-using NUnit.Framework;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
 using PartySearchApi.Api.Services;
@@ -44,7 +41,7 @@ namespace PartySearchApi.UnitTests.Services
                 PageSize = 10
             };
 
-            _mockRepository.Setup(r => r.SearchPartiesAsync(
+            _ = _mockRepository.Setup(r => r.SearchPartiesAsync(
                     "Acme", null, null, 1, 10))
                 .ReturnsAsync((testParties, 1));
 
@@ -52,13 +49,13 @@ namespace PartySearchApi.UnitTests.Services
             var result = await _service.SearchPartiesAsync(request);
 
             // Assert
-            result.Data.Should().HaveCount(1);
-            result.Data[0].PartyId.Should().Be("P12345678");
+            _ = result.Data.Should().HaveCount(1);
+            _ = result.Data[0].PartyId.Should().Be("P12345678");
 
-            result.Pagination.TotalResults.Should().Be(1);
-            result.Pagination.TotalPages.Should().Be(1);
-            result.Pagination.CurrentPage.Should().Be(1);
-            result.Pagination.PageSize.Should().Be(10);
+            _ = result.Pagination.TotalResults.Should().Be(1);
+            _ = result.Pagination.TotalPages.Should().Be(1);
+            _ = result.Pagination.CurrentPage.Should().Be(1);
+            _ = result.Pagination.PageSize.Should().Be(10);
         }
 
         [Test]
@@ -85,7 +82,7 @@ namespace PartySearchApi.UnitTests.Services
                 PageSize = 10
             };
 
-            _mockRepository.Setup(r => r.SearchPartiesAsync(
+            _ = _mockRepository.Setup(r => r.SearchPartiesAsync(
                     "Test", null, null, 1, 10))
                 .ReturnsAsync((testParties, 95)); // 95 total results
 
@@ -93,8 +90,8 @@ namespace PartySearchApi.UnitTests.Services
             var result = await _service.SearchPartiesAsync(request);
 
             // Assert
-            result.Pagination.TotalResults.Should().Be(95);
-            result.Pagination.TotalPages.Should().Be(10); // Ceiling of 95/10 = 10
+            _ = result.Pagination.TotalResults.Should().Be(95);
+            _ = result.Pagination.TotalPages.Should().Be(10); // Ceiling of 95/10 = 10
         }
     }
 }
