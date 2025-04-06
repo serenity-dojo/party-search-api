@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +16,10 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         private readonly InMemoryPartyRepository _repository = new();
         private readonly JsonSerializerOptions _jsonOptions = new()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNameCaseInsensitive = true,
+            Converters = { new JsonStringEnumConverter() }
         };
+
 
         [SetUp]
         public async Task Setup()
