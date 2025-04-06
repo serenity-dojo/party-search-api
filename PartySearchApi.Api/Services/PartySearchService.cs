@@ -18,8 +18,6 @@ namespace PartySearchApi.Api.Services
                 request.Page,
                 request.PageSize);
 
-            Console.WriteLine("Matching parties: " + string.Join(", ", parties.Select(p => p.Name)));
-
             // Calculate total pages (ceiling of totalCount / pageSize)
             int totalPages = (int)Math.Ceiling((double)totalCount / request.PageSize);
 
