@@ -1,0 +1,51 @@
+# Ignore build output directories
+/bin/
+/obj/
+/artifacts/
+
+# Visual Studio specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider/JetBrains settings
+.idea/
+*.sln.iml
+
+# VS Code settings
+.vscode/
+
+# NuGet package files
+*.nupkg
+# NuGet package directories
+packages/
+.nuget/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# MSTest test results
+TestResults/
+
+# Publish files
+*.publish.xml
+*.publishproj
+
+# Dotnet files
+project.lock.json
+project.fragment.lock.json
+
+# Log files
+*.log
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Temporary files
+*.tmp
+*.temp
