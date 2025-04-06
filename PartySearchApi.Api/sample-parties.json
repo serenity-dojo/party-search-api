@@ -1,0 +1,142 @@
+﻿[
+    {
+        "partyId": "P12345678",
+        "name": "Acme Corporation",
+        "type": "Organization",
+        "sanctionsStatus": "Approved",
+        "matchScore": "95%"
+    },
+    {
+        "partyId": "P87654321",
+        "name": "John Smith",
+        "type": "Individual",
+        "sanctionsStatus": "Approved",
+        "matchScore": "90%"
+    },
+    {
+        "partyId": "P87654322",
+        "name": "Jane Smith",
+        "type": "Individual",
+        "sanctionsStatus": "PendingReview",
+        "matchScore": "85%"
+    },
+    {
+        "partyId": "P22223333",
+        "name": "Global Trade Partners Ltd",
+        "type": "Organization",
+        "sanctionsStatus": "Escalated",
+        "matchScore": "78%"
+    },
+    {
+        "partyId": "P11114444",
+        "name": "Robert Johnson",
+        "type": "Individual",
+        "sanctionsStatus": "ConfirmedMatch",
+        "matchScore": "99%"
+    },
+    {
+        "partyId": "P55556666",
+        "name": "AlphaBeta Solutions",
+        "type": "Organization",
+        "sanctionsStatus": "PendingReview",
+        "matchScore": "72%"
+    },
+    {
+        "partyId": "P77778888",
+        "name": "Maria Garcia",
+        "type": "Individual",
+        "sanctionsStatus": "FalsePositive",
+        "matchScore": "65%"
+    },
+    {
+        "partyId": "P99990000",
+        "name": "TechInvest Holdings",
+        "type": "Organization",
+        "sanctionsStatus": "Approved",
+        "matchScore": "88%"
+    },
+    {
+        "partyId": "P11112222",
+        "name": "Michael Chen",
+        "type": "Individual",
+        "sanctionsStatus": "Approved",
+        "matchScore": "92%"
+    },
+    {
+        "partyId": "P33334444",
+        "name": "East-West Trading Co",
+        "type": "Organization",
+        "sanctionsStatus": "ConfirmedMatch",
+        "matchScore": "97%"
+    },
+    {
+        "partyId": "P55557777",
+        "name": "Sarah Williams",
+        "type": "Individual",
+        "sanctionsStatus": "Escalated",
+        "matchScore": "82%"
+    },
+    {
+        "partyId": "P66668888",
+        "name": "Quantum Finance Group",
+        "type": "Organization",
+        "sanctionsStatus": "FalsePositive",
+        "matchScore": "63%"
+    },
+    {
+        "partyId": "P12121212",
+        "name": "David Patel",
+        "type": "Individual",
+        "sanctionsStatus": "PendingReview",
+        "matchScore": "76%"
+    },
+    {
+        "partyId": "P23232323",
+        "name": "Continental Shipping Inc",
+        "type": "Organization",
+        "sanctionsStatus": "Approved",
+        "matchScore": "89%"
+    },
+    {
+        "partyId": "P34343434",
+        "name": "Omar Al-Farsi",
+        "type": "Individual",
+        "sanctionsStatus": "ConfirmedMatch",
+        "matchScore": "98%"
+    },
+    {
+        "partyId": "P45454545",
+        "name": "Nordic Investment Partners",
+        "type": "Organization",
+        "sanctionsStatus": "PendingReview",
+        "matchScore": "79%"
+    },
+    {
+        "partyId": "P56565656",
+        "name": "James Wilson",
+        "type": "Individual",
+        "sanctionsStatus": "FalsePositive",
+        "matchScore": "61%"
+    },
+    {
+        "partyId": "P67676767",
+        "name": "Sunrise Exports Ltd",
+        "type": "Organization",
+        "sanctionsStatus": "Escalated",
+        "matchScore": "87%"
+    },
+    {
+        "partyId": "P78787878",
+        "name": "Elena Rodriguez",
+        "type": "Individual",
+        "sanctionsStatus": "Approved",
+        "matchScore": "91%"
+    },
+    {
+        "partyId": "P89898989",
+        "name": "Pacific Rim Ventures",
+        "type": "Organization",
+        "sanctionsStatus": "PendingReview",
+        "matchScore": "73%"
+    }
+]

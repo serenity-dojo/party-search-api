@@ -57,8 +57,8 @@ namespace PartySearchApi.UnitTests.Controllers
                 "Acme",
                 "Organization",
                 null,
-                1,
-                10);
+                "1",
+                "10");
 
             // Assert
             var okResult = result.Result as OkObjectResult;
