@@ -81,14 +81,14 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         }
 
         [When(@"{word} searches for {string}")]
-        public async Task WhenSearchesFor(string person, string searchTerm)
+        public async Task WhenSearchesFor(string _, string searchTerm)
         {
             _searchRequest = new SearchRequest(searchTerm);
             await PerformSearch();
         }
 
         [When(@"{word} searches for {string} with the following filters:")]
-        public async Task WhenSearchesForWithTheFollowingFilters(string person, string searchTerm, Table table)
+        public async Task WhenSearchesForWithTheFollowingFilters(string _, string searchTerm, Table table)
         {
             PartyType? type = null;
             SanctionsStatus? sanctionsStatus = null;
@@ -109,7 +109,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         }
 
         [When(@"{word} searches for {string} with the following parameters:")]
-        public async Task WhenSearchesForWithTheFollowingParameters(string person, string searchTerm, Table table)
+        public async Task WhenSearchesForWithTheFollowingParameters(string _, string searchTerm, Table table)
         {
 
             int page = 1;

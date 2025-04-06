@@ -1,74 +1,114 @@
-using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
 using PartySearchApi.Api.Services;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+// Add services to the container
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
 
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Party Search API",
         Version = "v1",
-        Description = "API for searching sanctioned parties"
+        Description = "API for searching sanctioned parties in the banking system"
     });
 
-    c.SchemaFilter<EnumSchemaFilter>();
+    // Include XML comments
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
 });
 
+// Register application services
 builder.Services.AddSingleton<IPartyRepository, InMemoryPartyRepository>();
 builder.Services.AddScoped<IPartySearchService, PartySearchService>();
+builder.Services.AddScoped<PartyDataSeeder>();
 
-// Add CORS if needed
+// Add CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
+    options.AddPolicy("DevelopmentPolicy", policy =>
     {
-        _ = builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    var urls = app.Urls.ToArray();
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("===========================================================");
+    Console.WriteLine("Party Search API is running on the following URLs:");
+    foreach (var url in urls)
+    {
+        Console.WriteLine($"  {url}");
+    }
+    Console.WriteLine($"  Party Search: {urls.First()}/api/PartySearch/search?searchTerm=Acme");
+    Console.WriteLine($"  Swagger UI: {urls.First()}/swagger");
+    Console.WriteLine("===========================================================");
+    Console.ResetColor();
+});
+
+
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    _ = app.UseSwagger();
-    _ = app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseCors("DevelopmentPolicy");
+
+    string? seedDataFile = GetSeedDataFileArgument(Environment.GetCommandLineArgs());
+
+    if (!string.IsNullOrEmpty(seedDataFile))
+    {
+        using var scope = app.Services.CreateScope();
+        var seeder = scope.ServiceProvider.GetRequiredService<PartyDataSeeder>();
+        await seeder.SeedFromJsonFile(seedDataFile);
+    }
+}
+else
+{
+    // In production, use more restrictive CORS and enable HSTS
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
 
-public class EnumSchemaFilter : ISchemaFilter
+// Helper method to get the seed data file path from command line arguments
+static string? GetSeedDataFileArgument(string[] args)
 {
-    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+    for (int i = 0; i < args.Length - 1; i++)
     {
-        if (context.Type.IsEnum)
+        if (string.Equals(args[i], "--seed-data", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(args[i], "--seeddata", StringComparison.OrdinalIgnoreCase))
         {
-            schema.Enum.Clear();
-            schema.Type = "string";
-
-            foreach (var name in Enum.GetNames(context.Type))
-            {
-                schema.Enum.Add(new OpenApiString(name));
-            }
+            return args[i + 1];
         }
     }
+    return null;
 }
 
-
-// Make the Program class public so it can be used by the tests
 public partial class Program { }
