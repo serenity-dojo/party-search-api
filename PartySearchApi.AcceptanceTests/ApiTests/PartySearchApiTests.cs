@@ -62,7 +62,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         public async Task BasicConnectivityTest()
         {
             // Make a simple request
-            var response = await _httpClient.GetAsync("api/partysearch/search?searchTerm=Acme");
+            var response = await _httpClient.GetAsync("api/parties?query=Acme");
 
             Console.WriteLine($"Response status: {response.StatusCode}");
 
@@ -85,7 +85,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         public async Task SearchAPI_WithValidRequest_ReturnsCorrectResults()
         {
             // Act - Make request
-            var response = await _httpClient.GetAsync("api/partysearch/search?searchTerm=Acme");
+            var response = await _httpClient.GetAsync("api/parties?query=Acme");
 
             // Assert
             _ = response.IsSuccessStatusCode.Should().BeTrue();
@@ -104,7 +104,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         {
             // Act - Use query parameters
             var response = await _httpClient.GetAsync(
-                "api/partysearch/search?searchTerm=Smith&type=Individual&sanctionsStatus=Approved");
+                "api/parties?query=Smith&type=Individual&sanctionsStatus=Approved");
 
             // Assert
             _ = response.IsSuccessStatusCode.Should().BeTrue();
@@ -129,7 +129,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
 
             // Act - Request page 2 with 10 items per page
             var response = await _httpClient.GetAsync(
-                "api/partysearch/search?searchTerm=Test&page=2&pageSize=10");
+                "api/parties?query=Test&page=2&pageSize=10");
 
             // Assert
             _ = response.IsSuccessStatusCode.Should().BeTrue();
@@ -151,7 +151,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         {
             // Act - Search for something that doesn't exist
             var response = await _httpClient.GetAsync(
-                "api/partysearch/search?searchTerm=Nonexistent");
+                "api/parties?query=Nonexistent");
 
             // Assert
             _ = response.IsSuccessStatusCode.Should().BeTrue();
@@ -170,7 +170,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         {
             // Act - Search with different case
             var response = await _httpClient.GetAsync(
-                "api/partysearch/search?searchTerm=acme");
+                "api/parties?query=acme");
 
             // Assert
             _ = response.IsSuccessStatusCode.Should().BeTrue();

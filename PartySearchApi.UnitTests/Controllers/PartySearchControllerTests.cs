@@ -11,13 +11,13 @@ namespace PartySearchApi.UnitTests.Controllers
     public class PartySearchControllerTests
     {
         private Mock<IPartySearchService> _mockService;
-        private PartySearchController _controller;
+        private PartiesController _controller;
 
         [SetUp]
         public void Setup()
         {
             _mockService = new Mock<IPartySearchService>();
-            _controller = new PartySearchController(_mockService.Object);
+            _controller = new PartiesController(_mockService.Object);
         }
 
         [Test]

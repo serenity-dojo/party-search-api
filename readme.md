@@ -75,7 +75,7 @@ To view and interact with the API through Swagger UI.
 ### Search Parties
 
 ```
-GET /api/partysearch/search
+GET /api/parties
 ```
 
 #### Query Parameters
@@ -92,17 +92,17 @@ GET /api/partysearch/search
 
 Search for parties with "Smith" in the name:
 ```
-GET /api/partysearch/search?searchTerm=Smith
+GET /api/parties?searchTerm=Smith
 ```
 
 Search for individual parties with pending review:
 ```
-GET /api/partysearch/search?searchTerm=&type=Individual&sanctionsStatus=PendingReview
+GET /api/parties?searchTerm=&type=Individual&sanctionsStatus=PendingReview
 ```
 
 Get the second page of results with 5 items per page:
 ```
-GET /api/partysearch/search?searchTerm=&page=2&pageSize=5
+GET /api/parties?searchTerm=&page=2&pageSize=5
 ```
 
 ## Running Tests

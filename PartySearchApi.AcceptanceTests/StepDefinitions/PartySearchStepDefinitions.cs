@@ -197,7 +197,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
 
             // Build query parameters
             var queryBuilder = HttpUtility.ParseQueryString(string.Empty);
-            queryBuilder["searchTerm"] = _searchRequest.SearchTerm;
+            queryBuilder["query"] = _searchRequest.SearchTerm;
 
             if (_searchRequest.Type.HasValue)
             {
@@ -213,7 +213,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             queryBuilder["pageSize"] = _searchRequest.PageSize.ToString();
 
             var queryString = queryBuilder.ToString();
-            var response = await _client.GetAsync($"api/partysearch/search?{queryString}");
+            var response = await _client.GetAsync($"api/parties?{queryString}");
             _ = response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
