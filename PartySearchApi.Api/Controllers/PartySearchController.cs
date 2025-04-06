@@ -6,25 +6,20 @@ namespace PartySearchApi.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PartySearchController : ControllerBase
+    public class PartySearchController(IPartySearchService service) : ControllerBase
     {
-        private readonly IPartySearchService _service;
-
-        public PartySearchController(IPartySearchService service)
-        {
-            _service = service;
-        }
+        private readonly IPartySearchService _service = service;
 
         [HttpGet("search")]
         public async Task<ActionResult<SearchResponse>> Search(
             [FromQuery] string searchTerm,
-            [FromQuery] string type = null,
-            [FromQuery] string sanctionsStatus = null,
+            [FromQuery] string? type = null,
+            [FromQuery] string? sanctionsStatus = null,
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10)
         {
-            PartyType? parsedType = ParseEnum<PartyType>(type);
-            SanctionsStatus? parsedStatus = ParseEnum<SanctionsStatus>(sanctionsStatus);
+            PartyType? parsedType = (type == null) ? null : ParseEnum<PartyType>(type);
+            SanctionsStatus? parsedStatus = (sanctionsStatus == null) ? null : ParseEnum<SanctionsStatus>(sanctionsStatus);
 
             var request = new SearchRequest
             {
@@ -39,7 +34,7 @@ namespace PartySearchApi.Api.Controllers
             return Ok(response);
         }
 
-        private TEnum? ParseEnum<TEnum>(string value) where TEnum : struct
+        private static TEnum? ParseEnum<TEnum>(string value) where TEnum : struct
         {
             if (!string.IsNullOrEmpty(value) && Enum.TryParse<TEnum>(value, true, out var result))
             {

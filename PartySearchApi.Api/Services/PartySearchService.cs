@@ -3,14 +3,9 @@ using PartySearchApi.Api.Repositories;
 
 namespace PartySearchApi.Api.Services
 {
-    public class PartySearchService : IPartySearchService
+    public class PartySearchService(IPartyRepository repository) : IPartySearchService
     {
-        private readonly IPartyRepository _repository;
-
-        public PartySearchService(IPartyRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly IPartyRepository _repository = repository;
 
         public async Task<SearchResponse> SearchPartiesAsync(SearchRequest request)
         {

@@ -32,17 +32,16 @@ namespace PartySearchApi.UnitTests.Controllers
                 PageSize = 10
             };
 
-            var response = new SearchResponse(new List<Party>
-                {
-                    new Party
-                    {
+            var response = new SearchResponse(
+                [
+                    new() {
                         PartyId = "P12345678",
                         Name = "Acme Corporation",
                         Type = PartyType.Organization,
                         SanctionsStatus = SanctionsStatus.Approved,
                         MatchScore = "95%"
                     }
-                },
+                ],
                 new Pagination(1, 1, 1, 10)
              );
 

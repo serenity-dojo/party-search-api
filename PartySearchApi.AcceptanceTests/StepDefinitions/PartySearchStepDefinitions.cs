@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using PartySearchApi.AcceptanceTests.Models;
+using PartySearchApi.AcceptanceTests.Model;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
 using Reqnroll;
@@ -15,8 +15,8 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
     {
         private readonly HttpClient _client;
         private readonly InMemoryPartyRepository _repository = new();
-        private SearchRequest _searchRequest;
-        private SearchResponse _searchResponse;
+        private SearchRequest? _searchRequest;
+        private SearchResponse? _searchResponse;
 
         public PartySearchStepDefinitions()
         {
@@ -48,9 +48,6 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         {
             // Clear any data from previous scenarios
             await _repository.ClearAllAsync();
-
-            // Reset search request for each scenario
-            _searchRequest = new SearchRequest();
         }
 
         [Given(@"the following parties exist:")]
@@ -62,7 +59,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             await _repository.AddPartiesAsync(parties);
         }
 
-        [Given(@"(.*) parties exist with a name containing ""(.*)""")]
+        [Given(@"{int} parties exist with a name containing {string}")]
         public async Task GivenPartiesExistWithANameContaining(int count, string nameContains)
         {
             var parties = new List<Party>();
@@ -83,30 +80,14 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             await _repository.AddPartiesAsync(parties);
         }
 
-        [Given(@"the Party API returns the following parties for the search query ""(.*)""")]
-        public async Task GivenThePartyAPIReturnsTheFollowingParties(string searchQuery, Table table)
-        {
-            var parties = table.CreateSet<PartyDto>().Select(MapToParty).ToList();
-
-            // Add to repository
-            await _repository.AddPartiesAsync(parties);
-        }
-
-        [When(@"(.*) searches for ""(.*)""")]
+        [When(@"{word} searches for {string}")]
         public async Task WhenSearchesFor(string person, string searchTerm)
         {
             _searchRequest = new SearchRequest(searchTerm);
             await PerformSearch();
         }
 
-        [When(@"(.*) searches for ""(.*)"" and filters by Type ""(.*)""")]
-        public async Task WhenSearchesForAndFiltersByType(string person, string searchTerm, string type)
-        {
-            _searchRequest = new SearchRequest(searchTerm, Enum.Parse<PartyType>(type));
-            await PerformSearch();
-        }
-
-        [When(@"(.*) searches for ""(.*)"" with the following filters:")]
+        [When(@"{word} searches for {string} with the following filters:")]
         public async Task WhenSearchesForWithTheFollowingFilters(string person, string searchTerm, Table table)
         {
             PartyType? type = null;
@@ -127,7 +108,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             await PerformSearch();
         }
 
-        [When(@"(.*) searches for ""(.*)"" with the following parameters:")]
+        [When(@"{word} searches for {string} with the following parameters:")]
         public async Task WhenSearchesForWithTheFollowingParameters(string person, string searchTerm, Table table)
         {
 
@@ -154,6 +135,8 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         [Then(@"the search results should contain exactly:")]
         public void ThenTheSearchResultsShouldContainExactly(Table table)
         {
+            _searchResponse.Should().NotBeNull();
+
             var expectedParties = table.CreateSet<PartyDto>().Select(MapToParty).ToList();
 
             _ = _searchResponse.Data.Should().HaveCount(expectedParties.Count);
@@ -172,18 +155,21 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         [Then(@"the search results should be empty")]
         public void ThenTheSearchResultsShouldBeEmpty()
         {
-            _ = _searchResponse.Data.Should().BeEmpty();
+            _searchResponse.Should().NotBeNull();
+            _searchResponse.Data.Should().BeEmpty();
         }
 
-        [Then(@"the parties returned should be items (.*)\-(.*) of the complete result set")]
+        [Then(@"the parties returned should be items {int}-{int} of the complete result set")]
         public void ThenThePartiesReturnedShouldBeItemsOfTheCompleteResultSet(int start, int end)
         {
-            _ = _searchResponse.Data.Should().HaveCount(end - start + 1);
+            _searchResponse.Should().NotBeNull();
+            _searchResponse.Data.Should().HaveCount(end - start + 1);
         }
 
         [Then(@"the response should include pagination metadata:")]
         public void ThenTheResponseShouldIncludePaginationMetadata(Table table)
         {
+            _searchResponse.Should().NotBeNull();
             foreach (var row in table.Rows)
             {
                 if (row.ContainsKey("totalResults"))
@@ -207,6 +193,8 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
 
         private async Task PerformSearch()
         {
+            _searchRequest.Should().NotBeNull();
+
             // Build query parameters
             var queryBuilder = HttpUtility.ParseQueryString(string.Empty);
             queryBuilder["searchTerm"] = _searchRequest.SearchTerm;
@@ -232,7 +220,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
             _searchResponse = JsonConvert.DeserializeObject<SearchResponse>(content);
         }
 
-        private SanctionsStatus ParseSanctionsStatus(string status)
+        private static SanctionsStatus ParseSanctionsStatus(string status)
         {
             return status switch
             {

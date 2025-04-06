@@ -4,7 +4,7 @@ namespace PartySearchApi.Api.Repositories
 {
     public class InMemoryPartyRepository : IPartyRepository
     {
-        private readonly List<Party> _parties = new();
+        private readonly List<Party> _parties = [];
 
         public Task<List<Party>> GetAllPartiesAsync()
         {
@@ -38,8 +38,8 @@ namespace PartySearchApi.Api.Repositories
             {
                 searchTerm = searchTerm.ToLower();
                 query = query.Where(p =>
-                    p.Name.ToLower().Contains(searchTerm) ||
-                    p.PartyId.ToLower().Contains(searchTerm));
+                    p.Name.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase) ||
+                    p.PartyId.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase));
             }
 
             // Filter by type if provided

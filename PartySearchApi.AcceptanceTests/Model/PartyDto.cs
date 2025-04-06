@@ -1,11 +1,11 @@
-﻿namespace PartySearchApi.AcceptanceTests.Models
+﻿namespace PartySearchApi.AcceptanceTests.Model
 {
     public class PartyDto
     {
-        public string PartyId { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string SanctionsStatus { get; set; }
-        public string MatchScore { get; set; }
+        public required string PartyId { get; set; }
+        public required string Name { get; set; }
+        public required string Type { get; set; }
+        public required string SanctionsStatus { get; set; }
+        public required string MatchScore { get; set; }
     }
 }

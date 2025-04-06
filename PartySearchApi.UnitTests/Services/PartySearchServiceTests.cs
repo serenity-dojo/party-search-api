@@ -25,7 +25,7 @@ namespace PartySearchApi.UnitTests.Services
             // Arrange
             var testParties = new List<Party>
             {
-                new Party {
+                new() {
                     PartyId = "P12345678",
                     Name = "Acme Corporation",
                     Type = PartyType.Organization,
