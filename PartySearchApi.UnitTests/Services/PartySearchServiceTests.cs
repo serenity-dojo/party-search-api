@@ -49,8 +49,8 @@ namespace PartySearchApi.UnitTests.Services
             var result = await _service.SearchPartiesAsync(request);
 
             // Assert
-            _ = result.Data.Should().HaveCount(1);
-            _ = result.Data[0].PartyId.Should().Be("P12345678");
+            _ = result.Results.Should().HaveCount(1);
+            _ = result.Results[0].PartyId.Should().Be("P12345678");
 
             _ = result.Pagination.TotalResults.Should().Be(1);
             _ = result.Pagination.TotalPages.Should().Be(1);

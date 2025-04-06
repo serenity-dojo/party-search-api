@@ -139,11 +139,11 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
 
             var expectedParties = table.CreateSet<PartyDto>().Select(MapToParty).ToList();
 
-            _ = _searchResponse.Data.Should().HaveCount(expectedParties.Count);
+            _ = _searchResponse.Results.Should().HaveCount(expectedParties.Count);
 
             foreach (var expectedParty in expectedParties)
             {
-                _ = _searchResponse.Data.Should().Contain(p =>
+                _ = _searchResponse.Results.Should().Contain(p =>
                     p.PartyId == expectedParty.PartyId &&
                     p.Name == expectedParty.Name &&
                     p.Type == expectedParty.Type &&
@@ -156,14 +156,14 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         public void ThenTheSearchResultsShouldBeEmpty()
         {
             _searchResponse.Should().NotBeNull();
-            _searchResponse.Data.Should().BeEmpty();
+            _searchResponse.Results.Should().BeEmpty();
         }
 
         [Then(@"the parties returned should be items {int}-{int} of the complete result set")]
         public void ThenThePartiesReturnedShouldBeItemsOfTheCompleteResultSet(int start, int end)
         {
             _searchResponse.Should().NotBeNull();
-            _searchResponse.Data.Should().HaveCount(end - start + 1);
+            _searchResponse.Results.Should().HaveCount(end - start + 1);
         }
 
         [Then(@"the response should include pagination metadata:")]

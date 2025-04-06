@@ -59,29 +59,6 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
         }
 
         [Test]
-        public async Task BasicConnectivityTest()
-        {
-            // Make a simple request
-            var response = await _httpClient.GetAsync("api/parties?query=Acme");
-
-            Console.WriteLine($"Response status: {response.StatusCode}");
-
-            // Only read content if successful to avoid exceptions
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Response content preview: {content.Substring(0, Math.Min(100, content.Length))}");
-            }
-            else
-            {
-                Console.WriteLine($"Response error: {response.ReasonPhrase}");
-            }
-
-            // Assert
-            _ = response.IsSuccessStatusCode.Should().BeTrue();
-        }
-
-        [Test]
         public async Task SearchAPI_WithValidRequest_ReturnsCorrectResults()
         {
             // Act - Make request
@@ -95,8 +72,8 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 content, _jsonOptions);
 
             _ = searchResponse.Should().NotBeNull();
-            _ = searchResponse.Data.Should().HaveCountGreaterThan(0);
-            _ = searchResponse.Data.Should().Contain(p => p.Name.Contains("Acme"));
+            _ = searchResponse.Results.Should().HaveCountGreaterThan(0);
+            _ = searchResponse.Results.Should().Contain(p => p.Name.Contains("Acme"));
         }
 
         [Test]
@@ -114,7 +91,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 content, _jsonOptions);
 
             _ = searchResponse.Should().NotBeNull();
-            _ = searchResponse.Data.Should().OnlyContain(p =>
+            _ = searchResponse.Results.Should().OnlyContain(p =>
                 p.Name.Contains("Smith") &&
                 p.Type == PartyType.Individual &&
                 p.SanctionsStatus == SanctionsStatus.Approved);
@@ -139,7 +116,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 content, _jsonOptions);
 
             _ = searchResponse.Should().NotBeNull();
-            _ = searchResponse.Data.Should().HaveCount(10); // Second page should have 10 items
+            _ = searchResponse.Results.Should().HaveCount(10); // Second page should have 10 items
             _ = searchResponse.Pagination.CurrentPage.Should().Be(2);
             _ = searchResponse.Pagination.PageSize.Should().Be(10);
             _ = searchResponse.Pagination.TotalResults.Should().Be(30);
@@ -161,7 +138,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 content, _jsonOptions);
 
             _ = searchResponse.Should().NotBeNull();
-            _ = searchResponse.Data.Should().BeEmpty();
+            _ = searchResponse.Results.Should().BeEmpty();
             _ = searchResponse.Pagination.TotalResults.Should().Be(0);
         }
 
@@ -180,35 +157,35 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                 content, _jsonOptions);
 
             _ = searchResponse.Should().NotBeNull();
-            _ = searchResponse.Data.Should().Contain(p => p.Name == "Acme Corporation");
+            _ = searchResponse.Results.Should().Contain(p => p.Name == "Acme Corporation");
         }
 
         private async Task SeedTestData()
         {
             var parties = new List<Party>
             {
-                new Party {
+                new() {
                     PartyId = "P12345678",
                     Name = "Acme Corporation",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
                     MatchScore = "95%"
                 },
-                new Party {
+                new() {
                     PartyId = "P87654321",
                     Name = "John Smith",
                     Type = PartyType.Individual,
                     SanctionsStatus = SanctionsStatus.Approved,
                     MatchScore = "90%"
                 },
-                new Party {
+                new() {
                     PartyId = "P87654322",
                     Name = "Jane Smith",
                     Type = PartyType.Individual,
                     SanctionsStatus = SanctionsStatus.PendingReview,
                     MatchScore = "85%"
                 },
-                new Party {
+                new() {
                     PartyId = "P87654323",
                     Name = "Smith Organization",
                     Type = PartyType.Organization,

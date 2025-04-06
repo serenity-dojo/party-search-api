@@ -66,8 +66,8 @@ namespace PartySearchApi.UnitTests.Controllers
 
             var returnedResponse = okResult.Value as SearchResponse;
             _ = returnedResponse.Should().NotBeNull();
-            _ = returnedResponse.Data.Should().HaveCount(1);
-            _ = returnedResponse.Data[0].PartyId.Should().Be("P12345678");
+            _ = returnedResponse.Results.Should().HaveCount(1);
+            _ = returnedResponse.Results[0].PartyId.Should().Be("P12345678");
         }
     }
 }
