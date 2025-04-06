@@ -52,23 +52,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.Lifetime.ApplicationStarted.Register(() =>
-{
-    var urls = app.Urls.ToArray();
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("===========================================================");
-    Console.WriteLine("Party Search API is running on the following URLs:");
-    foreach (var url in urls)
-    {
-        Console.WriteLine($"  {url}");
-    }
-    Console.WriteLine($"  Party Search: {urls.First()}/api/PartySearch/search?searchTerm=Acme");
-    Console.WriteLine($"  Swagger UI: {urls.First()}/swagger");
-    Console.WriteLine("===========================================================");
-    Console.ResetColor();
-});
-
-
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {

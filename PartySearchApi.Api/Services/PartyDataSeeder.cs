@@ -62,49 +62,5 @@ namespace PartySearchApi.Api.Services
                 return false;
             }
         }
-
-        // This overload is useful for testing where we want to directly provide JSON content
-        public async Task<bool> SeedFromJsonString(string jsonContent)
-        {
-            try
-            {
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    AllowTrailingCommas = true,
-                    Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
-                };
-
-                var parties = JsonSerializer.Deserialize<List<Party>>(jsonContent, options);
-
-                if (parties == null || parties.Count == 0)
-                {
-                    _logger.LogWarning("No parties found in the provided JSON.");
-                    return false;
-                }
-
-                // Check if repository already has data
-                var existingParties = await _repository.GetAllPartiesAsync();
-                if (existingParties.Count != 0)
-                {
-                    _logger.LogInformation("Database already contains data. Skipping seed operation.");
-                    return false;
-                }
-
-                await _repository.AddPartiesAsync(parties);
-                _logger.LogInformation("Successfully seeded database with {Count} parties", parties.Count);
-                return true;
-            }
-            catch (JsonException jsonEx)
-            {
-                _logger.LogError(jsonEx, "Error parsing JSON data");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error seeding data");
-                return false;
-            }
-        }
     }
 }
