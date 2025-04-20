@@ -140,6 +140,8 @@ You can create custom JSON files for testing different scenarios. The sample dat
 ]
 ```
 
+You can then run the application with the `--seed-data` option to load this data.
+
 ### Architecture
 
 The API follows a layered architecture:

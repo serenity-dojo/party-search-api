@@ -1,5 +1,8 @@
-﻿Feature: Search for a party by name or ID
+﻿@allure.label.epic:Sanctions
+@allure.label.feature:PartySearch
+Feature: Search for a sanctioned party by name or ID
   
+  @allure.label.story:SearchByPartyName
   Rule: Searches should return the correct parties based on full or partial name
 
     Example: Search by full name returns an exact match
@@ -26,6 +29,7 @@
         | P12345678 | Acme Corporation | Organization | Approved         |         95% |
         | P87654321 | Acme Inc.        | Organization | Pending Review   |         65% |
 
+  @allure.label.story:SearchByPartyId
   Rule: Searches should return the correct parties based on ID
 
     Example: Search by ID returns the correct party
@@ -57,6 +61,7 @@
       When Connie searches for "XYZ"
       Then the search results should be empty
 
+  @allure.label.story:SearchByPartyName
   Rule: Searches should be case-insensitive
 
     Example: The one where Connie searches for "acme corporation"
@@ -68,6 +73,7 @@
         | Party ID  | Name             | Type         | Sanctions Status | Match Score |
         | P12345678 | Acme Corporation | Organization | Approved         |         95% |
 
+  @allure.label.story:SortingSearchResults
   Rule: Search results are ordered in alphabetical order
 
     Example: Search results are ordered by name
@@ -82,6 +88,7 @@
         | P87654329 | Axe Capital     | Organization | Escalated        |         85% |
         | P87654321 | Axel Accounting | Organization | Pending Review   |         70% |
 
+  @allure.label.story:FilterSearchResults
   Rule: Searches can be filtered by Type
 
     Example: Connie searches for organisations named Smith
@@ -114,6 +121,7 @@
         | P87654321 | Jane Smith       | Individual | Pending Review   |         85% |
         | P87654339 | Sarah-Jane Smith | Individual | False Positive   |         80% |
 
+  @allure.label.story:FilterSearchResults
   Rule: Search results can be filtered by Sanction Status
 
     Example: Larry filters his search results to only show parties that are Pending Review
@@ -146,6 +154,7 @@
         | Party ID  | Name          | Type         | Sanctions Status | Match Score |
         | P12345678 | John Smith    | Individual   | Confirmed Match  |         90% |
 
+  @allure.label.story:FilterSearchResults
   Rule: Large result sets are paginated for easier navigation
 
     Example: Search results are paginated

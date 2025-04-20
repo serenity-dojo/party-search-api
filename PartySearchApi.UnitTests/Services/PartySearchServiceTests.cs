@@ -41,7 +41,7 @@ namespace PartySearchApi.UnitTests.Services
                 PageSize = 10
             };
 
-            _ = _mockRepository.Setup(r => r.SearchPartiesAsync(
+            _mockRepository.Setup(r => r.SearchPartiesAsync(
                     "Acme", null, null, 1, 10))
                 .ReturnsAsync((testParties, 1));
 
@@ -49,13 +49,13 @@ namespace PartySearchApi.UnitTests.Services
             var result = await _service.SearchPartiesAsync(request);
 
             // Assert
-            _ = result.Results.Should().HaveCount(1);
-            _ = result.Results[0].PartyId.Should().Be("P12345678");
+            result.Results.Should().HaveCount(1);
+            result.Results[0].PartyId.Should().Be("P12345678");
 
-            _ = result.Pagination.TotalResults.Should().Be(1);
-            _ = result.Pagination.TotalPages.Should().Be(1);
-            _ = result.Pagination.CurrentPage.Should().Be(1);
-            _ = result.Pagination.PageSize.Should().Be(10);
+            result.Pagination.TotalResults.Should().Be(1);
+            result.Pagination.TotalPages.Should().Be(1);
+            result.Pagination.CurrentPage.Should().Be(1);
+            result.Pagination.PageSize.Should().Be(10);
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace PartySearchApi.UnitTests.Services
                 PageSize = 10
             };
 
-            _ = _mockRepository.Setup(r => r.SearchPartiesAsync(
+            _mockRepository.Setup(r => r.SearchPartiesAsync(
                     "Test", null, null, 1, 10))
                 .ReturnsAsync((testParties, 95)); // 95 total results
 
@@ -90,8 +90,8 @@ namespace PartySearchApi.UnitTests.Services
             var result = await _service.SearchPartiesAsync(request);
 
             // Assert
-            _ = result.Pagination.TotalResults.Should().Be(95);
-            _ = result.Pagination.TotalPages.Should().Be(10); // Ceiling of 95/10 = 10
+            result.Pagination.TotalResults.Should().Be(95);
+            result.Pagination.TotalPages.Should().Be(10); // Ceiling of 95/10 = 10
         }
     }
 }

@@ -10,14 +10,14 @@ using Reqnroll;
 
 namespace PartySearchApi.AcceptanceTests.StepDefinitions
 {
-    [Binding]
-    public class PartySearchStepDefinitions
+    [Binding]    public class PartySearchStepDefinitions
     {
         private readonly HttpClient _client;
         private readonly InMemoryPartyRepository _repository = new();
         private SearchRequest? _searchRequest;
         private SearchResponse? _searchResponse;
 
+        
         public PartySearchStepDefinitions()
         {
             // Create WebApplicationFactory with our test repository
@@ -133,17 +133,17 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
         }
 
         [Then(@"the search results should contain exactly:")]
-        public void ThenTheSearchResultsShouldContainExactly(Table table)
+        public void ThenTheSearchResultsShouldContainExactly(Table expectedPartyData)
         {
             _searchResponse.Should().NotBeNull();
 
-            var expectedParties = table.CreateSet<PartyDto>().Select(MapToParty).ToList();
+            var expectedParties = expectedPartyData.CreateSet<PartyDto>().Select(MapToParty).ToList();
 
-            _ = _searchResponse.Results.Should().HaveCount(expectedParties.Count);
+            _searchResponse.Results.Should().HaveCount(expectedParties.Count);
 
             foreach (var expectedParty in expectedParties)
             {
-                _ = _searchResponse.Results.Should().Contain(p =>
+                _searchResponse.Results.Should().Contain(p =>
                     p.PartyId == expectedParty.PartyId &&
                     p.Name == expectedParty.Name &&
                     p.Type == expectedParty.Type &&

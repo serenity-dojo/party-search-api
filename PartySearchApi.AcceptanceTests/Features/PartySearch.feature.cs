@@ -20,16 +20,20 @@ namespace PartySearchApi.AcceptanceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Search for a party by name or ID")]
+    [NUnit.Framework.DescriptionAttribute("Search for a sanctioned party by name or ID")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class SearchForAPartyByNameOrIDFeature
+    [NUnit.Framework.CategoryAttribute("allure.label.epic:Sanctions")]
+    [NUnit.Framework.CategoryAttribute("allure.label.feature:PartySearch")]
+    public partial class SearchForASanctionedPartyByNameOrIDFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "allure.label.epic:Sanctions",
+                "allure.label.feature:PartySearch"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en"), "Features", "Search for a party by name or ID", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Search for a sanctioned party by name or ID", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
 #line 1 "PartySearch.feature"
 #line hidden
@@ -88,8 +92,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by full name returns an exact match", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 5
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by full name returns an exact match", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SearchByPartyName"}));
+#line 8
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -123,10 +128,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Escalated",
                             "85%"});
-#line 7
+#line 10
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table1, "Given ");
 #line hidden
-#line 12
+#line 15
       await testRunner.WhenAsync("Connie searches for \"Acme Corporation\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
@@ -141,7 +146,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Approved",
                             "95%"});
-#line 13
+#line 16
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table2, "Then ");
 #line hidden
             }
@@ -154,8 +159,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by partial name returns all matching parties", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 17
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by partial name returns all matching parties", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SearchByPartyName"}));
+#line 20
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -189,10 +195,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Escalated",
                             "85%"});
-#line 18
+#line 21
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table3, "Given ");
 #line hidden
-#line 23
+#line 26
       await testRunner.WhenAsync("Connie searches for \"Acme\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
@@ -213,7 +219,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Pending Review",
                             "65%"});
-#line 24
+#line 27
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table4, "Then ");
 #line hidden
             }
@@ -226,8 +232,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by ID returns the correct party", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 31
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by ID returns the correct party", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SearchByPartyId"}));
+#line 35
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -255,10 +262,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Escalated",
                             "85%"});
-#line 32
+#line 36
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table5, "Given ");
 #line hidden
-#line 36
+#line 40
       await testRunner.WhenAsync("Connie searches for \"P12345678\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
@@ -273,7 +280,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Approved",
                             "95%"});
-#line 37
+#line 41
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table6, "Then ");
 #line hidden
             }
@@ -286,8 +293,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by partial ID returns the matching party", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 41
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search by partial ID returns the matching party", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SearchByPartyId"}));
+#line 45
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -321,10 +329,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Pending Review",
                             "70%"});
-#line 42
+#line 46
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table7, "Given ");
 #line hidden
-#line 47
+#line 51
       await testRunner.WhenAsync("Connie searches for \"P12345\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
@@ -345,7 +353,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Escalated",
                             "85%"});
-#line 48
+#line 52
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table8, "Then ");
 #line hidden
             }
@@ -358,8 +366,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search for an unknown ID returns no results", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 53
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search for an unknown ID returns no results", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SearchByPartyId"}));
+#line 57
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -381,13 +390,13 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Approved",
                             "95%"});
-#line 54
+#line 58
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table9, "Given ");
 #line hidden
-#line 57
+#line 61
       await testRunner.WhenAsync("Connie searches for \"XYZ\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 58
+#line 62
       await testRunner.ThenAsync("the search results should be empty", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -400,8 +409,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("The one where Connie searches for \"acme corporation\"", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 62
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("The one where Connie searches for \"acme corporation\"", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SearchByPartyName"}));
+#line 67
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -423,10 +433,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Approved",
                             "95%"});
-#line 63
+#line 68
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table10, "Given ");
 #line hidden
-#line 66
+#line 71
       await testRunner.WhenAsync("Connie searches for \"acme corporation\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
@@ -441,7 +451,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Approved",
                             "95%"});
-#line 67
+#line 72
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table11, "Then ");
 #line hidden
             }
@@ -454,8 +464,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search results are ordered by name", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 73
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search results are ordered by name", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:SortingSearchResults"}));
+#line 79
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -489,10 +500,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Escalated",
                             "85%"});
-#line 74
+#line 80
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table12, "Given ");
 #line hidden
-#line 79
+#line 85
       await testRunner.WhenAsync("Connie searches for \"Axe\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
@@ -513,7 +524,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Pending Review",
                             "70%"});
-#line 80
+#line 86
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table13, "Then ");
 #line hidden
             }
@@ -526,8 +537,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Connie searches for organisations named Smith", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 87
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Connie searches for organisations named Smith", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:FilterSearchResults"}));
+#line 94
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -567,7 +579,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "False Positive",
                             "80%"});
-#line 88
+#line 95
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table14, "Given ");
 #line hidden
                 global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
@@ -576,7 +588,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                 table15.AddRow(new string[] {
                             "Type",
                             "Organization"});
-#line 94
+#line 101
       await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table15, "When ");
 #line hidden
                 global::Reqnroll.Table table16 = new global::Reqnroll.Table(new string[] {
@@ -591,7 +603,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Organization",
                             "Escalated",
                             "80%"});
-#line 97
+#line 104
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table16, "Then ");
 #line hidden
             }
@@ -604,8 +616,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Connie searches for individuals named Smith", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 101
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Connie searches for individuals named Smith", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:FilterSearchResults"}));
+#line 108
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -645,7 +658,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "False Positive",
                             "80%"});
-#line 102
+#line 109
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table17, "Given ");
 #line hidden
                 global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
@@ -654,7 +667,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                 table18.AddRow(new string[] {
                             "Type",
                             "Individual"});
-#line 108
+#line 115
       await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table18, "When ");
 #line hidden
                 global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
@@ -681,7 +694,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "False Positive",
                             "80%"});
-#line 111
+#line 118
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table19, "Then ");
 #line hidden
             }
@@ -694,8 +707,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Larry filters his search results to only show parties that are Pending Review", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 119
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Larry filters his search results to only show parties that are Pending Review", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:FilterSearchResults"}));
+#line 127
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -735,7 +749,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "Pending Review",
                             "80%"});
-#line 120
+#line 128
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table20, "Given ");
 #line hidden
                 global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
@@ -744,7 +758,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                 table21.AddRow(new string[] {
                             "Status",
                             "Pending Review"});
-#line 126
+#line 134
       await testRunner.WhenAsync("Larry searches for \"Smith\" with the following filters:", ((string)(null)), table21, "When ");
 #line hidden
                 global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
@@ -765,7 +779,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "Pending Review",
                             "80%"});
-#line 129
+#line 137
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table22, "Then ");
 #line hidden
             }
@@ -778,8 +792,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Connie filters her search results to only Individuals that are Confirmed Matches", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 134
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Connie filters her search results to only Individuals that are Confirmed Matches", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:FilterSearchResults"}));
+#line 142
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -819,7 +834,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "False Positive",
                             "80%"});
-#line 135
+#line 143
       await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table23, "Given ");
 #line hidden
                 global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
@@ -831,7 +846,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                 table24.AddRow(new string[] {
                             "Sanction Status",
                             "Confirmed Match"});
-#line 141
+#line 149
       await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table24, "When ");
 #line hidden
                 global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
@@ -846,7 +861,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "Confirmed Match",
                             "90%"});
-#line 145
+#line 153
       await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table25, "Then ");
 #line hidden
             }
@@ -859,8 +874,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search results are paginated", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 151
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Search results are paginated", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:FilterSearchResults"}));
+#line 160
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -870,7 +886,7 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 152
+#line 161
       await testRunner.GivenAsync("100 parties exist with a name containing \"Smith\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
                 global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
@@ -879,10 +895,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                 table26.AddRow(new string[] {
                             "1",
                             "10"});
-#line 153
+#line 162
       await testRunner.WhenAsync("Connie searches for \"Smith\" with the following parameters:", ((string)(null)), table26, "When ");
 #line hidden
-#line 156
+#line 165
       await testRunner.ThenAsync("the parties returned should be items 1-10 of the complete result set", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
                 global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
@@ -895,7 +911,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "10",
                             "1",
                             "10"});
-#line 157
+#line 166
       await testRunner.AndAsync("the response should include pagination metadata:", ((string)(null)), table27, "And ");
 #line hidden
             }
@@ -908,8 +924,9 @@ namespace PartySearchApi.AcceptanceTests.Features
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Fetching the results for a different page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 161
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Fetching the results for a different page", null, tagsOfScenario, argumentsOfScenario, TagHelper.CombineTags(featureTags, new string[] {
+                            "allure.label.story:FilterSearchResults"}));
+#line 170
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -919,7 +936,7 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 162
+#line 171
       await testRunner.GivenAsync("95 parties exist with a name containing \"Smith\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
                 global::Reqnroll.Table table28 = new global::Reqnroll.Table(new string[] {
@@ -928,10 +945,10 @@ namespace PartySearchApi.AcceptanceTests.Features
                 table28.AddRow(new string[] {
                             "2",
                             "10"});
-#line 163
+#line 172
       await testRunner.WhenAsync("Connie searches for \"Smith\" with the following parameters:", ((string)(null)), table28, "When ");
 #line hidden
-#line 166
+#line 175
       await testRunner.ThenAsync("the parties returned should be items 11-20 of the complete result set", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
                 global::Reqnroll.Table table29 = new global::Reqnroll.Table(new string[] {
@@ -944,7 +961,7 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "10",
                             "2",
                             "10"});
-#line 167
+#line 176
       await testRunner.AndAsync("the response should include pagination metadata:", ((string)(null)), table29, "And ");
 #line hidden
             }
