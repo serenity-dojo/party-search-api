@@ -24,21 +24,21 @@ namespace PartySearchApi.UnitTests.Repositories
                     Name = "Acme Corporation",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "95%"
+                    MatchScore = 0.95m
                 },
                 new() {
                     PartyId = "P87654321",
                     Name = "Acme Inc.",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.PendingReview,
-                    MatchScore = "65%"
+                    MatchScore = 0.65m
                 },
                 new() {
                     PartyId = "P87654329",
                     Name = "Axe Capital",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Escalated,
-                    MatchScore = "85%"
+                    MatchScore = 0.85m
                 }
             ];
 
@@ -92,7 +92,7 @@ namespace PartySearchApi.UnitTests.Repositories
                     Name = "John Acme",
                     Type = PartyType.Individual,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "90%"
+                    MatchScore = 0.90m
                 }
             ]);
 

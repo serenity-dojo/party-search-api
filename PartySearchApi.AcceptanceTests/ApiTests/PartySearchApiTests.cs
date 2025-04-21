@@ -172,28 +172,28 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                     Name = "Acme Corporation",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "95%"
+                    MatchScore = 0.95m 
                 },
                 new() {
                     PartyId = "P87654321",
                     Name = "John Smith",
                     Type = PartyType.Individual,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "90%"
+                    MatchScore = 0.90m 
                 },
                 new() {
                     PartyId = "P87654322",
                     Name = "Jane Smith",
                     Type = PartyType.Individual,
                     SanctionsStatus = SanctionsStatus.PendingReview,
-                    MatchScore = "85%"
+                    MatchScore = 0.85m 
                 },
                 new() {
                     PartyId = "P87654323",
                     Name = "Smith Organization",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "80%"
+                    MatchScore = 0.80m
                 }
             };
 
@@ -212,7 +212,7 @@ namespace PartySearchApi.AcceptanceTests.ApiTests
                     Name = $"{namePrefix} Party {i}",
                     Type = i % 2 == 0 ? PartyType.Individual : PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "80%"
+                    MatchScore = 0.80m 
                 });
             }
 

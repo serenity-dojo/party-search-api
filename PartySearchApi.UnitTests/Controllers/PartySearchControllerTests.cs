@@ -39,7 +39,7 @@ namespace PartySearchApi.UnitTests.Controllers
                         Name = "Acme Corporation",
                         Type = PartyType.Organization,
                         SanctionsStatus = SanctionsStatus.Approved,
-                        MatchScore = "95%"
+                        MatchScore = 0.95m
                     }
                 ],
                 new Pagination(1, 1, 1, 10)

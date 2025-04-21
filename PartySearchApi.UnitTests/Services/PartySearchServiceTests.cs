@@ -30,7 +30,7 @@ namespace PartySearchApi.UnitTests.Services
                     Name = "Acme Corporation",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "95%"
+                    MatchScore = 0.95m
                 }
             };
 
@@ -71,7 +71,7 @@ namespace PartySearchApi.UnitTests.Services
                     Name = $"Test Party {i}",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "80%"
+                    MatchScore = 0.80m
                 });
             }
 

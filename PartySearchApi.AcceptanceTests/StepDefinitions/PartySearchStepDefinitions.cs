@@ -72,7 +72,7 @@ namespace PartySearchApi.AcceptanceTests.StepDefinitions
                     Name = $"{nameContains} Test {i}",
                     Type = i % 2 == 0 ? PartyType.Individual : PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
-                    MatchScore = "80%"
+                    MatchScore = 0.8m
                 });
             }
 

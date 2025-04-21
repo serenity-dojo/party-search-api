@@ -58,14 +58,14 @@ namespace PartySearchApi.UnitTests.Services
                     ""name"": ""Acme Corporation"",
                     ""type"": ""Organization"",
                     ""sanctionsStatus"": ""Approved"",
-                    ""matchScore"": ""95%""
+                    ""matchScore"": 0.95
                 },
                 {
                     ""partyId"": ""P87654321"",
                     ""name"": ""John Smith"",
                     ""type"": ""Individual"",
                     ""sanctionsStatus"": ""Approved"",
-                    ""matchScore"": ""90%""
+                    ""matchScore"": 0.90
                 }
             ]";
 
@@ -121,7 +121,7 @@ namespace PartySearchApi.UnitTests.Services
                     ""name"": ""Missing Party ID"",
                     ""type"": ""Organization"",
                     ""sanctionsStatus"": ""Approved"",
-                    ""matchScore"": ""95%""
+                    ""matchScore"": 0.95
                 }
             ]";
 
@@ -149,7 +149,7 @@ namespace PartySearchApi.UnitTests.Services
                     ""name"": ""Acme Corporation"",
                     ""type"": ""Organization"",
                     ""sanctionsStatus"": ""Approved"",
-                    ""matchScore"": ""95%""
+                    ""matchScore"": 0.95
                 }
             ]";
 

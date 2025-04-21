@@ -47,12 +47,6 @@
     <Folder Include="Model\" />
   </ItemGroup>
 
-	<ItemGroup>
-		<None Update="allureConfig.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
     <ProjectExtensions><VisualStudio><UserProperties reqnroll_1json__JsonSchema="{" /></VisualStudio></ProjectExtensions>
 
 </Project>
