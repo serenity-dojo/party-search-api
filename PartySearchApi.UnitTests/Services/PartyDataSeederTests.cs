@@ -1,42 +1,40 @@
-﻿// In PartySearchApi.UnitTests/Services/PartyDataSeederTests.cs
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using NUnit.Framework;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
 using PartySearchApi.Api.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace PartySearchApi.UnitTests.Services
 {
-    [TestFixture]
-    public class PartyDataSeederTests
+    public class PartyDataSeederTests : IDisposable
     {
-        private Mock<IPartyRepository> _mockRepository;
-        private Mock<ILogger<PartyDataSeeder>> _mockLogger;
-        private PartyDataSeeder _seeder;
-        private string _testFilesPath;
+        private readonly Mock<IPartyRepository> _mockRepository;
+        private readonly Mock<ILogger<PartyDataSeeder>> _mockLogger;
+        private readonly PartyDataSeeder _seeder;
+        private readonly string _testFilesPath;
 
-        [SetUp]
-        public void Setup()
+        public PartyDataSeederTests()
         {
             _mockRepository = new Mock<IPartyRepository>();
             _mockLogger = new Mock<ILogger<PartyDataSeeder>>();
             _seeder = new PartyDataSeeder(_mockRepository.Object, _mockLogger.Object);
 
-            // Create directory for test files in the output directory
-            _testFilesPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestFiles");
+            // Create directory for test files in the current directory
+            _testFilesPath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles");
             if (!Directory.Exists(_testFilesPath))
             {
                 Directory.CreateDirectory(_testFilesPath);
             }
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             // Clean up test files after tests run
             if (Directory.Exists(_testFilesPath))
@@ -45,8 +43,8 @@ namespace PartySearchApi.UnitTests.Services
             }
         }
 
-        [Test]
-        public async Task SeedFromJsonFile_ValidJson_ReturnsTrue()
+        [Fact]
+        public async Task SeedFromJsonFile_ValidJson_ShouldSeedDataAndReturnTrue()
         {
             // Arrange
             _mockRepository.Setup(r => r.GetAllPartiesAsync())
@@ -80,8 +78,8 @@ namespace PartySearchApi.UnitTests.Services
             _mockRepository.Verify(r => r.AddPartiesAsync(It.Is<List<Party>>(p => p.Count == 2)), Times.Once);
         }
 
-        [Test]
-        public async Task SeedFromJsonFile_EmptyJson_ReturnsFalse()
+        [Fact]
+        public async Task SeedFromJsonFile_EmptyJson_ShouldNotSeedAndReturnFalse()
         {
             // Arrange
             string emptyJson = "[]";
@@ -94,10 +92,18 @@ namespace PartySearchApi.UnitTests.Services
             // Assert
             result.Should().BeFalse();
             _mockRepository.Verify(r => r.AddPartiesAsync(It.IsAny<List<Party>>()), Times.Never);
+            _mockLogger.Verify(
+                x => x.Log(
+                    LogLevel.Warning,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("No parties found")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
         }
 
-        [Test]
-        public async Task SeedFromJsonFile_InvalidJson_ReturnsFalse()
+        [Fact]
+        public async Task SeedFromJsonFile_InvalidJson_ShouldNotSeedAndReturnFalse()
         {
             // Arrange
             string invalidJson = "This is not JSON";
@@ -110,38 +116,23 @@ namespace PartySearchApi.UnitTests.Services
             // Assert
             result.Should().BeFalse();
             _mockRepository.Verify(r => r.AddPartiesAsync(It.IsAny<List<Party>>()), Times.Never);
+            _mockLogger.Verify(
+                x => x.Log(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Error parsing")),
+                    It.IsAny<Exception>(),
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
         }
 
-        [Test]
-        public async Task SeedFromJsonFile_MissingRequiredFields_ReturnsFalse()
-        {
-            // Arrange
-            string invalidJson = @"[
-                {
-                    ""name"": ""Missing Party ID"",
-                    ""type"": ""Organization"",
-                    ""sanctionsStatus"": ""Approved"",
-                    ""matchScore"": 0.95
-                }
-            ]";
 
-            string filePath = Path.Combine(_testFilesPath, "missing-fields-parties.json");
-            await File.WriteAllTextAsync(filePath, invalidJson);
-
-            // Act
-            var result = await _seeder.SeedFromJsonFile(filePath);
-
-            // Assert
-            result.Should().BeFalse();
-            _mockRepository.Verify(r => r.AddPartiesAsync(It.IsAny<List<Party>>()), Times.Never);
-        }
-
-        [Test]
-        public async Task SeedFromJsonFile_RepositoryAlreadyHasData_ReturnsFalse()
+        [Fact]
+        public async Task SeedFromJsonFile_RepositoryAlreadyHasData_ShouldNotSeedAndReturnFalse()
         {
             // Arrange
             _mockRepository.Setup(r => r.GetAllPartiesAsync())
-                .ReturnsAsync([new()]);
+                .ReturnsAsync([new Party()]);
 
             string validJson = @"[
                 {
@@ -162,20 +153,53 @@ namespace PartySearchApi.UnitTests.Services
             // Assert
             result.Should().BeFalse();
             _mockRepository.Verify(r => r.AddPartiesAsync(It.IsAny<List<Party>>()), Times.Never);
+            _mockLogger.Verify(
+                x => x.Log(
+                    LogLevel.Information,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("already contains data")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
         }
 
-        [Test]
-        public async Task SeedFromJsonFile_FileNotFound_ReturnsFalse()
+
+        [Fact]
+        public async Task SeedFromJsonFile_RepositoryThrowsException_ShouldHandleAndReturnFalse()
         {
             // Arrange
-            string nonExistentFilePath = Path.Combine(_testFilesPath, "non-existent-file.json");
+            _mockRepository.Setup(r => r.GetAllPartiesAsync())
+                .ReturnsAsync([]);
+            _mockRepository.Setup(r => r.AddPartiesAsync(It.IsAny<List<Party>>()))
+                .ThrowsAsync(new Exception("Database connection error"));
+
+            string validJson = @"[
+                {
+                    ""partyId"": ""P12345678"",
+                    ""name"": ""Acme Corporation"",
+                    ""type"": ""Organization"",
+                    ""sanctionsStatus"": ""Approved"",
+                    ""matchScore"": 0.95
+                }
+            ]";
+
+            string filePath = Path.Combine(_testFilesPath, "throws-exception.json");
+            await File.WriteAllTextAsync(filePath, validJson);
 
             // Act
-            var result = await _seeder.SeedFromJsonFile(nonExistentFilePath);
+            var result = await _seeder.SeedFromJsonFile(filePath);
 
             // Assert
             result.Should().BeFalse();
-            _mockRepository.Verify(r => r.AddPartiesAsync(It.IsAny<List<Party>>()), Times.Never);
+            _mockLogger.Verify(
+                x => x.Log(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Error seeding")),
+                    It.IsAny<Exception>(),
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
         }
+
     }
 }

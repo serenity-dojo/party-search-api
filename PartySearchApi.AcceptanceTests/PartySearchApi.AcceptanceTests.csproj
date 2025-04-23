@@ -1,52 +1,55 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="C:\Users\john\.nuget\packages\allure.commons\3.5.0.73\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
-    <Content Remove="C:\Users\john\.nuget\packages\allure.net.commons\2.12.1\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
-    <Content Remove="C:\Users\john\.nuget\packages\allure.reqnroll\2.12.1\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Remove="C:\Users\john\.nuget\packages\allure.commons\3.5.0.73\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
+		<Content Remove="C:\Users\john\.nuget\packages\allure.net.commons\2.12.1\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
+		<Content Remove="C:\Users\john\.nuget\packages\allure.reqnroll\2.12.1\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Allure.Net.Commons" Version="2.12.1" />
-    <PackageReference Include="Allure.NUnit" Version="2.12.1" />
-    <PackageReference Include="coverlet.collector" Version="6.0.2" />
-    <PackageReference Include="coverlet.msbuild" Version="6.0.4">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="FluentAssertions" Version="8.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.3" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="NUnit" Version="4.2.2" />
-    <PackageReference Include="NUnit.Analyzers" Version="4.4.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-    <PackageReference Include="PactNet" Version="5.0.1" />
-    <PackageReference Include="ReqnRoll" Version="2.4.0" />
-    <PackageReference Include="ReqnRoll.NUnit" Version="2.4.0" />
-    <PackageReference Include="RestSharp" Version="112.1.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Allure.Net.Commons" Version="2.12.1" />
+		<PackageReference Include="Allure.NUnit" Version="2.12.1" />
+		<PackageReference Include="coverlet.collector" Version="6.0.2" />
+		<PackageReference Include="coverlet.msbuild" Version="6.0.4">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="FluentAssertions" Version="8.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="NUnit" Version="4.2.2" />
+		<PackageReference Include="NUnit.Analyzers" Version="4.4.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+		<PackageReference Include="PactNet" Version="5.0.1" />
+		<PackageReference Include="ReqnRoll" Version="2.4.0" />
+		<PackageReference Include="ReqnRoll.NUnit" Version="2.4.0" />
+		<PackageReference Include="RestSharp" Version="112.1.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Using Include="NUnit.Framework" />
-  </ItemGroup>
+	<ItemGroup>
+		<Using Include="NUnit.Framework" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PartySearchApi.Api\PartySearchApi.Api.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PartySearchApi.Api\PartySearchApi.Api.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="Model\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Model\" />
+	</ItemGroup>
 
-    <ProjectExtensions><VisualStudio><UserProperties reqnroll_1json__JsonSchema="{" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties reqnroll_1json__JsonSchema="{" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

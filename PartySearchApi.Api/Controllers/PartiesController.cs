@@ -6,9 +6,9 @@ namespace PartySearchApi.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PartiesController(IPartySearchService service) : ControllerBase
+    public class PartiesController(IPartyService partyService) : ControllerBase
     {
-        private readonly IPartySearchService _service = service;
+        private readonly IPartyService _partyService = partyService;
 
         /// <summary>
         /// Search for parties by name or ID with optional filtering
@@ -29,6 +29,9 @@ namespace PartySearchApi.Api.Controllers
             [FromQuery] string page = "1",
             [FromQuery] string pageSize = "10")
         {
+
+        Console.WriteLine($"Query: {query}, Type: {type}, SanctionsStatus: {sanctionsStatus}, Page: {page}, PageSize: {pageSize}"); 
+
             PartyType? parsedType = (type == null) ? null : ParseEnum<PartyType>(type);
             SanctionsStatus? parsedStatus = (sanctionsStatus == null) ? null : ParseEnum<SanctionsStatus>(sanctionsStatus);
 
@@ -43,9 +46,40 @@ namespace PartySearchApi.Api.Controllers
                 Page = parsedPage,
                 PageSize = parsedPageSize
             };
+        
+            Console.WriteLine($"Parsed Request: {request}");
 
-            var response = await _service.SearchPartiesAsync(request);
+            var response = await _partyService.SearchPartiesAsync(request);
+
+            Console.WriteLine($"Response: {response}");
+
             return Ok(response);
+        }
+
+        /// <summary>
+        /// Add a new party to the repository
+        /// </summary>
+        /// <param name="party">The party to be added</param>
+        /// <returns>Action result indicating success or failure</returns>
+        [HttpPost] // Maps POST requests to /api/parties
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddParty([FromBody] Party party)
+        {
+            if (party == null)
+            {
+                return BadRequest("Party cannot be null.");
+            }
+
+            try
+            {
+                await _partyService.OnboardPartyAsync(party);
+                return CreatedAtAction(nameof(Search), new { query = party.PartyId }, party);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         private static TEnum? ParseEnum<TEnum>(string value) where TEnum : struct

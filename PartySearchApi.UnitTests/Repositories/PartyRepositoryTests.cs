@@ -1,17 +1,18 @@
 ﻿using FluentAssertions;
 using PartySearchApi.Api.Models;
 using PartySearchApi.Api.Repositories;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace PartySearchApi.UnitTests.Repositories
 {
-    [TestFixture]
-    public class PartyRepositoryTests
+    public class PartyRepositoryTests : IAsyncLifetime
     {
         private IPartyRepository _repository;
         private List<Party> _testParties;
 
-        [SetUp]
-        public async Task Setup()
+        public async Task InitializeAsync()
         {
             // Create our test repository
             _repository = new InMemoryPartyRepository();
@@ -19,21 +20,24 @@ namespace PartySearchApi.UnitTests.Repositories
             // Set up test data
             _testParties =
             [
-                new() {
+                new()
+                {
                     PartyId = "P12345678",
                     Name = "Acme Corporation",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.Approved,
                     MatchScore = 0.95m
                 },
-                new() {
+                new()
+                {
                     PartyId = "P87654321",
                     Name = "Acme Inc.",
                     Type = PartyType.Organization,
                     SanctionsStatus = SanctionsStatus.PendingReview,
                     MatchScore = 0.65m
                 },
-                new() {
+                new()
+                {
                     PartyId = "P87654329",
                     Name = "Axe Capital",
                     Type = PartyType.Organization,
@@ -45,49 +49,56 @@ namespace PartySearchApi.UnitTests.Repositories
             await _repository.AddPartiesAsync(_testParties);
         }
 
-        [Test]
-        public async Task SearchPartiesAsync_SearchByFullName_ReturnsExactMatch()
+        public Task DisposeAsync()
         {
-            // Arrange & Act
-            var (Parties, _) = await _repository.SearchPartiesAsync("Acme Corporation");
-
-            // Assert
-            _ = Parties.Should().HaveCount(1);
-            _ = Parties[0].PartyId.Should().Be("P12345678");
-            _ = Parties[0].Name.Should().Be("Acme Corporation");
+            // Clean up resources if needed
+            return Task.CompletedTask;
         }
 
-        [Test]
-        public async Task SearchPartiesAsync_SearchByPartialName_ReturnsAllMatches()
+        [Fact]
+        public async Task SearchByFullName_ShouldReturnExactMatch()
         {
             // Arrange & Act
-            var (Parties, TotalCount) = await _repository.SearchPartiesAsync("Acme");
+            var (parties, _) = await _repository.SearchPartiesAsync("Acme Corporation");
 
             // Assert
-            _ = Parties.Should().HaveCount(2);
-            _ = Parties.Should().Contain(p => p.PartyId == "P12345678");
-            _ = Parties.Should().Contain(p => p.PartyId == "P87654321");
+            parties.Should().HaveCount(1);
+            parties[0].PartyId.Should().Be("P12345678");
+            parties[0].Name.Should().Be("Acme Corporation");
         }
 
-        [Test]
-        public async Task SearchPartiesAsync_SearchByPartialID_ReturnsMatchingParties()
+        [Fact]
+        public async Task SearchByPartialName_ShouldReturnAllMatches()
         {
             // Arrange & Act
-            var (Parties, TotalCount) = await _repository.SearchPartiesAsync("P87654");
+            var (parties, _) = await _repository.SearchPartiesAsync("Acme");
 
             // Assert
-            _ = Parties.Should().HaveCount(2);
-            _ = Parties.Should().Contain(p => p.PartyId == "P87654321");
-            _ = Parties.Should().Contain(p => p.PartyId == "P87654329");
+            parties.Should().HaveCount(2);
+            parties.Should().Contain(p => p.PartyId == "P12345678");
+            parties.Should().Contain(p => p.PartyId == "P87654321");
         }
 
-        [Test]
-        public async Task SearchPartiesAsync_FilterByType_ReturnsOnlyMatchingType()
+        [Fact]
+        public async Task SearchByPartialId_ShouldReturnMatchingParties()
         {
-            // First add an individual
+            // Arrange & Act
+            var (parties, _) = await _repository.SearchPartiesAsync("P87654");
+
+            // Assert
+            parties.Should().HaveCount(2);
+            parties.Should().Contain(p => p.PartyId == "P87654321");
+            parties.Should().Contain(p => p.PartyId == "P87654329");
+        }
+
+        [Fact]
+        public async Task FilterByType_ShouldReturnOnlyPartiesOfMatchingType()
+        {
+            // Arrange
             await _repository.AddPartiesAsync(
             [
-                new() {
+                new()
+                {
                     PartyId = "P11111111",
                     Name = "John Acme",
                     Type = PartyType.Individual,
@@ -96,25 +107,24 @@ namespace PartySearchApi.UnitTests.Repositories
                 }
             ]);
 
-            // Arrange & Act
-            var (Parties, TotalCount) = await _repository.SearchPartiesAsync("Acme", type: PartyType.Organization);
+            // Act
+            var (parties, _) = await _repository.SearchPartiesAsync("Acme", type: PartyType.Organization);
 
             // Assert
-            _ = Parties.Should().HaveCount(2);
-            _ = Parties.Should().OnlyContain(p => p.Type == PartyType.Organization);
+            parties.Should().HaveCount(2);
+            parties.Should().OnlyContain(p => p.Type == PartyType.Organization);
         }
 
-        [Test]
-        public async Task SearchPartiesAsync_FilterBySanctionsStatus_ReturnsOnlyMatchingStatus()
+        [Fact]
+        public async Task FilterBySanctionsStatus_ShouldReturnOnlyPartiesWithMatchingStatus()
         {
             // Arrange & Act
-            var (Parties, _) = await _repository.SearchPartiesAsync("Acme", sanctionsStatus: SanctionsStatus.PendingReview);
+            var (parties, _) = await _repository.SearchPartiesAsync("Acme", sanctionsStatus: SanctionsStatus.PendingReview);
 
             // Assert
-            _ = Parties.Should().HaveCount(1);
-            _ = Parties[0].PartyId.Should().Be("P87654321");
-            _ = Parties[0].SanctionsStatus.Should().Be(SanctionsStatus.PendingReview);
+            parties.Should().HaveCount(1);
+            parties[0].PartyId.Should().Be("P87654321");
+            parties[0].SanctionsStatus.Should().Be(SanctionsStatus.PendingReview);
         }
-
     }
 }

@@ -99,50 +99,50 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "P87654321",
                             "Axel Accounting",
                             "Organization",
                             "Pending Review",
                             "0.70"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "P87654329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
 #line 7
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table1, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table3, "Given ");
 #line hidden
 #line 12
       await testRunner.WhenAsync("Connie searches for \"Acme Corporation\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
 #line 13
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table2, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table4, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -165,56 +165,56 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "P87654321",
                             "Acme Inc.",
                             "Organization",
                             "Pending Review",
                             "0.65"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "P87654329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
 #line 18
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table3, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table5, "Given ");
 #line hidden
 #line 23
       await testRunner.WhenAsync("Connie searches for \"Acme\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "P87654321",
                             "Acme Inc.",
                             "Organization",
                             "Pending Review",
                             "0.65"});
 #line 24
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table4, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table6, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -237,44 +237,44 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table5.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table5.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "P87654329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
 #line 30
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table5, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table7, "Given ");
 #line hidden
 #line 34
       await testRunner.WhenAsync("Connie searches for \"P12345678\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table6.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
 #line 35
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table6, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table8, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -297,56 +297,56 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table7.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table7.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "P12345329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
-                table7.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "P87654321",
                             "Axel Accounting",
                             "Organization",
                             "Pending Review",
                             "0.70"});
 #line 40
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table7, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table9, "Given ");
 #line hidden
 #line 45
       await testRunner.WhenAsync("Connie searches for \"P12345\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table8.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table8.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "P12345329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
 #line 46
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table8, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table10, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -369,20 +369,20 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table9.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
 #line 52
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table9, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table11, "Given ");
 #line hidden
 #line 55
       await testRunner.WhenAsync("Connie searches for \"XYZ\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
@@ -411,38 +411,38 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table10.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
 #line 61
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table10, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table12, "Given ");
 #line hidden
 #line 64
       await testRunner.WhenAsync("Connie searches for \"acme corporation\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table11.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
 #line 65
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table11, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table13, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -465,56 +465,56 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table12.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "P12345678",
                             "Acme Corporation",
                             "Organization",
                             "Approved",
                             "0.95"});
-                table12.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "P87654321",
                             "Axel Accounting",
                             "Organization",
                             "Pending Review",
                             "0.70"});
-                table12.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "P87654329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
 #line 72
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table12, "Given ");
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table14, "Given ");
 #line hidden
 #line 77
       await testRunner.WhenAsync("Connie searches for \"Axe\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
                             "Type",
                             "Sanctions Status",
                             "Match Score"});
-                table13.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "P87654329",
                             "Axe Capital",
                             "Organization",
                             "Escalated",
                             "0.85"});
-                table13.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "P87654321",
                             "Axel Accounting",
                             "Organization",
                             "Pending Review",
                             "0.70"});
 #line 78
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table13, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table15, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -537,48 +537,6 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
-                            "Party ID",
-                            "Name",
-                            "Type",
-                            "Sanctions Status",
-                            "Match Score"});
-                table14.AddRow(new string[] {
-                            "P12345678",
-                            "John Smith",
-                            "Individual",
-                            "Approved",
-                            "0.90"});
-                table14.AddRow(new string[] {
-                            "P87654321",
-                            "Jane Smith",
-                            "Individual",
-                            "Pending Review",
-                            "0.85"});
-                table14.AddRow(new string[] {
-                            "P87654329",
-                            "Smith Johnson",
-                            "Organization",
-                            "Escalated",
-                            "0.80"});
-                table14.AddRow(new string[] {
-                            "P87654339",
-                            "Sarah-Jane Smith",
-                            "Individual",
-                            "False Positive",
-                            "0.80"});
-#line 86
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table14, "Given ");
-#line hidden
-                global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
-                            "Filter",
-                            "Value"});
-                table15.AddRow(new string[] {
-                            "Type",
-                            "Organization"});
-#line 92
-      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table15, "When ");
-#line hidden
                 global::Reqnroll.Table table16 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
@@ -586,13 +544,55 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Sanctions Status",
                             "Match Score"});
                 table16.AddRow(new string[] {
+                            "P12345678",
+                            "John Smith",
+                            "Individual",
+                            "Approved",
+                            "0.90"});
+                table16.AddRow(new string[] {
+                            "P87654321",
+                            "Jane Smith",
+                            "Individual",
+                            "Pending Review",
+                            "0.85"});
+                table16.AddRow(new string[] {
+                            "P87654329",
+                            "Smith Johnson",
+                            "Organization",
+                            "Escalated",
+                            "0.80"});
+                table16.AddRow(new string[] {
+                            "P87654339",
+                            "Sarah-Jane Smith",
+                            "Individual",
+                            "False Positive",
+                            "0.80"});
+#line 86
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table16, "Given ");
+#line hidden
+                global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
+                            "Filter",
+                            "Value"});
+                table17.AddRow(new string[] {
+                            "Type",
+                            "Organization"});
+#line 92
+      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table17, "When ");
+#line hidden
+                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
+                            "Party ID",
+                            "Name",
+                            "Type",
+                            "Sanctions Status",
+                            "Match Score"});
+                table18.AddRow(new string[] {
                             "P87654329",
                             "Smith Johnson",
                             "Organization",
                             "Escalated",
                             "0.80"});
 #line 95
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table16, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table18, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -615,48 +615,6 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
-                            "Party ID",
-                            "Name",
-                            "Type",
-                            "Sanctions Status",
-                            "Match Score"});
-                table17.AddRow(new string[] {
-                            "P12345678",
-                            "John Smith",
-                            "Individual",
-                            "Approved",
-                            "0.90"});
-                table17.AddRow(new string[] {
-                            "P87654321",
-                            "Jane Smith",
-                            "Individual",
-                            "Pending Review",
-                            "0.85"});
-                table17.AddRow(new string[] {
-                            "P87654329",
-                            "Smith Johnson",
-                            "Organization",
-                            "Escalated",
-                            "0.80"});
-                table17.AddRow(new string[] {
-                            "P87654339",
-                            "Sarah-Jane Smith",
-                            "Individual",
-                            "False Positive",
-                            "0.80"});
-#line 100
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table17, "Given ");
-#line hidden
-                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
-                            "Filter",
-                            "Value"});
-                table18.AddRow(new string[] {
-                            "Type",
-                            "Individual"});
-#line 106
-      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table18, "When ");
-#line hidden
                 global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
@@ -676,13 +634,55 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Pending Review",
                             "0.85"});
                 table19.AddRow(new string[] {
+                            "P87654329",
+                            "Smith Johnson",
+                            "Organization",
+                            "Escalated",
+                            "0.80"});
+                table19.AddRow(new string[] {
+                            "P87654339",
+                            "Sarah-Jane Smith",
+                            "Individual",
+                            "False Positive",
+                            "0.80"});
+#line 100
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table19, "Given ");
+#line hidden
+                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
+                            "Filter",
+                            "Value"});
+                table20.AddRow(new string[] {
+                            "Type",
+                            "Individual"});
+#line 106
+      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table20, "When ");
+#line hidden
+                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
+                            "Party ID",
+                            "Name",
+                            "Type",
+                            "Sanctions Status",
+                            "Match Score"});
+                table21.AddRow(new string[] {
+                            "P12345678",
+                            "John Smith",
+                            "Individual",
+                            "Approved",
+                            "0.90"});
+                table21.AddRow(new string[] {
+                            "P87654321",
+                            "Jane Smith",
+                            "Individual",
+                            "Pending Review",
+                            "0.85"});
+                table21.AddRow(new string[] {
                             "P87654339",
                             "Sarah-Jane Smith",
                             "Individual",
                             "False Positive",
                             "0.80"});
 #line 109
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table19, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table21, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -705,48 +705,6 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
-                            "Party ID",
-                            "Name",
-                            "Type",
-                            "Sanctions Status",
-                            "Match Score"});
-                table20.AddRow(new string[] {
-                            "P12345678",
-                            "John Smith",
-                            "Individual",
-                            "Approved",
-                            "0.90"});
-                table20.AddRow(new string[] {
-                            "P87654321",
-                            "Jane Smith",
-                            "Individual",
-                            "Pending Review",
-                            "0.85"});
-                table20.AddRow(new string[] {
-                            "P87654329",
-                            "Smith Johnson",
-                            "Organization",
-                            "Escalated",
-                            "0.80"});
-                table20.AddRow(new string[] {
-                            "P87654339",
-                            "Sarah-Jane Smith",
-                            "Individual",
-                            "Pending Review",
-                            "0.80"});
-#line 118
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table20, "Given ");
-#line hidden
-                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
-                            "Filter",
-                            "Value"});
-                table21.AddRow(new string[] {
-                            "Status",
-                            "Pending Review"});
-#line 124
-      await testRunner.WhenAsync("Larry searches for \"Smith\" with the following filters:", ((string)(null)), table21, "When ");
-#line hidden
                 global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
@@ -754,19 +712,61 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Sanctions Status",
                             "Match Score"});
                 table22.AddRow(new string[] {
+                            "P12345678",
+                            "John Smith",
+                            "Individual",
+                            "Approved",
+                            "0.90"});
+                table22.AddRow(new string[] {
                             "P87654321",
                             "Jane Smith",
                             "Individual",
                             "Pending Review",
                             "0.85"});
                 table22.AddRow(new string[] {
+                            "P87654329",
+                            "Smith Johnson",
+                            "Organization",
+                            "Escalated",
+                            "0.80"});
+                table22.AddRow(new string[] {
+                            "P87654339",
+                            "Sarah-Jane Smith",
+                            "Individual",
+                            "Pending Review",
+                            "0.80"});
+#line 118
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table22, "Given ");
+#line hidden
+                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
+                            "Filter",
+                            "Value"});
+                table23.AddRow(new string[] {
+                            "Status",
+                            "Pending Review"});
+#line 124
+      await testRunner.WhenAsync("Larry searches for \"Smith\" with the following filters:", ((string)(null)), table23, "When ");
+#line hidden
+                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
+                            "Party ID",
+                            "Name",
+                            "Type",
+                            "Sanctions Status",
+                            "Match Score"});
+                table24.AddRow(new string[] {
+                            "P87654321",
+                            "Jane Smith",
+                            "Individual",
+                            "Pending Review",
+                            "0.85"});
+                table24.AddRow(new string[] {
                             "P87654339",
                             "Sarah-Jane Smith",
                             "Individual",
                             "Pending Review",
                             "0.80"});
 #line 127
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table22, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table24, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -789,51 +789,6 @@ namespace PartySearchApi.AcceptanceTests.Features
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
-                            "Party ID",
-                            "Name",
-                            "Type",
-                            "Sanctions Status",
-                            "Match Score"});
-                table23.AddRow(new string[] {
-                            "P12345678",
-                            "John Smith",
-                            "Individual",
-                            "Confirmed Match",
-                            "0.90"});
-                table23.AddRow(new string[] {
-                            "P87654321",
-                            "Jane Smith",
-                            "Individual",
-                            "Pending Review",
-                            "0.85"});
-                table23.AddRow(new string[] {
-                            "P87654329",
-                            "Smith Johnson",
-                            "Organization",
-                            "Confirmed Match",
-                            "0.99"});
-                table23.AddRow(new string[] {
-                            "P87654339",
-                            "Sarah-Jane Smith",
-                            "Individual",
-                            "False Positive",
-                            "0.80"});
-#line 133
-      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table23, "Given ");
-#line hidden
-                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
-                            "Filter",
-                            "Value"});
-                table24.AddRow(new string[] {
-                            "Type",
-                            "Individual"});
-                table24.AddRow(new string[] {
-                            "Sanction Status",
-                            "Confirmed Match"});
-#line 139
-      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table24, "When ");
-#line hidden
                 global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
                             "Party ID",
                             "Name",
@@ -846,8 +801,53 @@ namespace PartySearchApi.AcceptanceTests.Features
                             "Individual",
                             "Confirmed Match",
                             "0.90"});
+                table25.AddRow(new string[] {
+                            "P87654321",
+                            "Jane Smith",
+                            "Individual",
+                            "Pending Review",
+                            "0.85"});
+                table25.AddRow(new string[] {
+                            "P87654329",
+                            "Smith Johnson",
+                            "Organization",
+                            "Confirmed Match",
+                            "0.99"});
+                table25.AddRow(new string[] {
+                            "P87654339",
+                            "Sarah-Jane Smith",
+                            "Individual",
+                            "False Positive",
+                            "0.80"});
+#line 133
+      await testRunner.GivenAsync("the following parties exist:", ((string)(null)), table25, "Given ");
+#line hidden
+                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                            "Filter",
+                            "Value"});
+                table26.AddRow(new string[] {
+                            "Type",
+                            "Individual"});
+                table26.AddRow(new string[] {
+                            "Sanction Status",
+                            "Confirmed Match"});
+#line 139
+      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following filters:", ((string)(null)), table26, "When ");
+#line hidden
+                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
+                            "Party ID",
+                            "Name",
+                            "Type",
+                            "Sanctions Status",
+                            "Match Score"});
+                table27.AddRow(new string[] {
+                            "P12345678",
+                            "John Smith",
+                            "Individual",
+                            "Confirmed Match",
+                            "0.90"});
 #line 143
-      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table25, "Then ");
+      await testRunner.ThenAsync("the search results should contain exactly:", ((string)(null)), table27, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -873,30 +873,30 @@ namespace PartySearchApi.AcceptanceTests.Features
 #line 150
       await testRunner.GivenAsync("100 parties exist with a name containing \"Smith\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table28 = new global::Reqnroll.Table(new string[] {
                             "Page",
                             "pageSize"});
-                table26.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "1",
                             "10"});
 #line 151
-      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following parameters:", ((string)(null)), table26, "When ");
+      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following parameters:", ((string)(null)), table28, "When ");
 #line hidden
 #line 154
       await testRunner.ThenAsync("the parties returned should be items 1-10 of the complete result set", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table29 = new global::Reqnroll.Table(new string[] {
                             "totalResults",
                             "totalPages",
                             "currentPage",
                             "pageSize"});
-                table27.AddRow(new string[] {
+                table29.AddRow(new string[] {
                             "100",
                             "10",
                             "1",
                             "10"});
 #line 155
-      await testRunner.AndAsync("the response should include pagination metadata:", ((string)(null)), table27, "And ");
+      await testRunner.AndAsync("the response should include pagination metadata:", ((string)(null)), table29, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -922,30 +922,30 @@ namespace PartySearchApi.AcceptanceTests.Features
 #line 160
       await testRunner.GivenAsync("95 parties exist with a name containing \"Smith\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table28 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table30 = new global::Reqnroll.Table(new string[] {
                             "Page",
                             "pageSize"});
-                table28.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "2",
                             "10"});
 #line 161
-      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following parameters:", ((string)(null)), table28, "When ");
+      await testRunner.WhenAsync("Connie searches for \"Smith\" with the following parameters:", ((string)(null)), table30, "When ");
 #line hidden
 #line 164
       await testRunner.ThenAsync("the parties returned should be items 11-20 of the complete result set", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-                global::Reqnroll.Table table29 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table31 = new global::Reqnroll.Table(new string[] {
                             "totalResults",
                             "totalPages",
                             "currentPage",
                             "pageSize"});
-                table29.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "95",
                             "10",
                             "2",
                             "10"});
 #line 165
-      await testRunner.AndAsync("the response should include pagination metadata:", ((string)(null)), table29, "And ");
+      await testRunner.AndAsync("the response should include pagination metadata:", ((string)(null)), table31, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

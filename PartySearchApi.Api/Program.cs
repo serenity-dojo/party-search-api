@@ -37,7 +37,7 @@ builder.Services.AddSwaggerGen(c =>
 
 // Register application services
 builder.Services.AddSingleton<IPartyRepository, InMemoryPartyRepository>();
-builder.Services.AddScoped<IPartySearchService, PartySearchService>();
+builder.Services.AddScoped<IPartyService, PartyService>();
 builder.Services.AddScoped<PartyDataSeeder>();
 
 // Add CORS policy
