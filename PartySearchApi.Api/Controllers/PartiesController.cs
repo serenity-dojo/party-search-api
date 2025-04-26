@@ -30,8 +30,6 @@ namespace PartySearchApi.Api.Controllers
             [FromQuery] string pageSize = "10")
         {
 
-        Console.WriteLine($"Query: {query}, Type: {type}, SanctionsStatus: {sanctionsStatus}, Page: {page}, PageSize: {pageSize}"); 
-
             PartyType? parsedType = (type == null) ? null : ParseEnum<PartyType>(type);
             SanctionsStatus? parsedStatus = (sanctionsStatus == null) ? null : ParseEnum<SanctionsStatus>(sanctionsStatus);
 
@@ -46,12 +44,8 @@ namespace PartySearchApi.Api.Controllers
                 Page = parsedPage,
                 PageSize = parsedPageSize
             };
-        
-            Console.WriteLine($"Parsed Request: {request}");
 
             var response = await _partyService.SearchPartiesAsync(request);
-
-            Console.WriteLine($"Response: {response}");
 
             return Ok(response);
         }
