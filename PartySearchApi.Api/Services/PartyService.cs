@@ -17,8 +17,6 @@ namespace PartySearchApi.Api.Services
         /// <returns>A <see cref="SearchResponse"/> containing the matching parties and pagination metadata.</returns>
         public async Task<SearchResponse> SearchPartiesAsync(SearchRequest request)
         {
-            Console.WriteLine($"Search request: {request.SearchTerm}, Page: {request.Page}");
-
             var (parties, totalCount) = await _repository.SearchPartiesAsync(
                 request.SearchTerm,
                 request.Type,
@@ -59,25 +57,20 @@ namespace PartySearchApi.Api.Services
             {
                 throw new ArgumentNullException(nameof(party), "Party cannot be null.");
             }
-            // Write a log message indicating the party being onboarded
-            Console.WriteLine($"Onboarding party: {party.Name}, Type: {party.Type}, SanctionsStatus: {party.SanctionsStatus}");
 
             // if the partyId is not provided, generate a random party ID in the format P-12345678
             if (party.PartyId == null || party.PartyId.Length == 0)
             {
                 party.PartyId = "P-" + new Random().Next(10000000, 100000000).ToString();
-                Console.WriteLine($"Party ID: {party.PartyId}");
             }
 
             var existingParties = await _repository.GetAllPartiesAsync();
             if (existingParties.Any(p => p.PartyId == party.PartyId))
             {
-                Console.WriteLine($"Error: A party with ID '{party.PartyId}' already exists.");
                 throw new InvalidOperationException($"A party with ID '{party.PartyId}' already exists.");
             }
 
             await _repository.AddPartiesAsync(new List<Party> { party });
-            Console.WriteLine($"Party onboarded successfully: {party.PartyId} - {party.Name}");
         }
     }
 }
