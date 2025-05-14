@@ -143,7 +143,7 @@ You can create custom JSON files for testing different scenarios. The sample dat
 You can then run the application with the `--seed-data` option to load this data, e.g.
 
 :
-```dotnet run --seed-data sample-parties.json
+```dotnet run --seed-data sample-parties.json```
 
 ### Architecture
 
